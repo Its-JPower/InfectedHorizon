@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://c62d041f84rpk"]
+
+[ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_mbq5b"]
+[ext_resource type="Texture2D" uid="uid://d0rkr5be6xhfw" path="res://Assets/Player/player_run_strip6.png" id="2_jnt2u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_65a33"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j68rs"]
+atlas = ExtResource("2_jnt2u")
+region = Rect2(0, 0, 87, 87)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0j1c"]
+atlas = ExtResource("2_jnt2u")
+region = Rect2(87, 0, 87, 87)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrbbg"]
+atlas = ExtResource("2_jnt2u")
+region = Rect2(174, 0, 87, 87)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sute4"]
+atlas = ExtResource("2_jnt2u")
+region = Rect2(261, 0, 87, 87)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfppp"]
+atlas = ExtResource("2_jnt2u")
+region = Rect2(348, 0, 87, 87)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yf3wb"]
+atlas = ExtResource("2_jnt2u")
+region = Rect2(435, 0, 87, 87)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3btn3"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j68rs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0j1c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrbbg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sute4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfppp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yf3wb")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_mbq5b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_65a33")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, -2)
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_3btn3")
+animation = &"run"
+frame_progress = 0.668083
