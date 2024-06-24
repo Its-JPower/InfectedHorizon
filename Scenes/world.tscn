@@ -6,3 +6,6 @@
 
 [node name="Player" parent="." instance=ExtResource("1_oxrfq")]
 position = Vector2(214, 151)
+
+[node name="Ground" type="TileMap" parent="."]
+format = 2
