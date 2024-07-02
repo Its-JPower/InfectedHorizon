@@ -561,7 +561,7 @@ shape = SubResource("CircleShape2D_7vlio")
 position = Vector2(1.90735e-06, -1.19209e-07)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_3btn3")
-animation = &"handgun_idle"
+animation = &"handgun_reload"
 autoplay = "handgun_idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
