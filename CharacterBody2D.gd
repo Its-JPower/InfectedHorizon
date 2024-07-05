@@ -15,13 +15,7 @@ var direction = Vector2.ZERO
 var target = Vector2.ZERO
 
 func _physics_process(delta):
-	direction = Input.get_vector("left","right","up","down").normalized()
-	if Input.is_action_pressed("move"):
-		target = get_global_mouse_position()
-	if global_position.distance_to(target) > 5:
-		if Input.is_action_pressed("move"):
-			velocity = global_position.direction_to(target) * speed
-			sprite.rotation = velocity.angle()
+	direction = Input.get_vector("left","right","up","down").normalized()                                                            
 	if direction:
 		velocity = velocity.move_toward(direction * speed, acceleration)
 		sprite.rotation = velocity.angle()
