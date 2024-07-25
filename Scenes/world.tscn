@@ -98,13 +98,3 @@ speed = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(4, 4)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Player/Camera2D"]
-offset_left = -28.75
-offset_top = -12.75
-offset_right = 95.25
-offset_bottom = 10.25
-scale = Vector2(0.1, 0.1)
-text = "Animation: IDLE"
-fit_content = true
-autowrap_mode = 0

@@ -31,7 +31,6 @@ func _physics_process(delta):
 			sprite.play("handgun_reload")
 			sprite.frame = 0
 	move_and_slide()
-	rich_text_label.text = "Animation: "+sprite.animation+" Animation Frame: "+str(sprite.frame)+"  Reload: "+str(reload)
 
 
 func _on_sprite_animation_finished():
