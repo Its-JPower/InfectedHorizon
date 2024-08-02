@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
+signal StaminaUpdate
 
 @export var speed : float = 100.0 #normal speed
 @export var sprint : float = 150.0 #speed when sprinting
-@export var stamina : float = 100.0 #stamina for sprinting
 @export var acceleration : float = 40.0
 @onready var player = $Sprite
 @onready var anim_player = $AnimationPlayer
@@ -19,6 +19,10 @@ var direction = Vector2.ZERO
 var target = Vector2.ZERO
 var target_rotation = 0.0
 
+var stamina := 100.0
+var max_stamina := 100.0
+var stamina_regen_rate := 0.01
+var max_regen_rate := 1.0
 
 func _physics_process(delta):
 	direction = Input.get_vector("left","right","up","down").normalized()                                                            
@@ -38,6 +42,10 @@ func _physics_process(delta):
 	elif velocity != Vector2.ZERO:
 		target_rotation = direction.angle()
 		player.rotation = lerp_angle(player.rotation, target_rotation, rotation_speed * delta)
+	if stamina < max_stamina:
+		stamina += regen_stamina(delta)
+		stamina = min(stamina, max_stamina)
+		StaminaUpdate.emit()
 	move_and_slide()
 
 
@@ -47,3 +55,7 @@ func _on_animation_player_animation_finished(anim_name):
 			anim_player.play("handgun_idle")
 		else:
 			anim_player.play("handgun_move")
+
+func regen_stamina(delta):
+	var regen = stamina_regen_rate * pow(2, stamina / max_stamina)
+	return min(regen, max_regen_rate) * delta
