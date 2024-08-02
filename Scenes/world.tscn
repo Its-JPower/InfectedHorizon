@@ -96,14 +96,3 @@ scale = Vector2(4, 4)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(4, 4)
-
-[node name="UI" type="Control" parent="Player/Camera2D"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Player/Camera2D/UI"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
