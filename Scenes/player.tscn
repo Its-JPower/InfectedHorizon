@@ -1,7 +1,10 @@
-[gd_scene load_steps=85 format=3 uid="uid://c62d041f84rpk"]
+[gd_scene load_steps=88 format=3 uid="uid://c62d041f84rpk"]
 
-[ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_mbq5b"]
+[ext_resource type="Script" path="res://player.gd" id="1_iskqk"]
 [ext_resource type="Texture2D" uid="uid://c0fxy1q2rfqwv" path="res://Assets/player_handgun.png" id="2_iqv6c"]
+[ext_resource type="Texture2D" uid="uid://declk6i853s4u" path="res://Assets/under.png" id="3_d6qts"]
+[ext_resource type="Texture2D" uid="uid://cw53jsecxx8na" path="res://Assets/e.png" id="4_34wha"]
+[ext_resource type="Texture2D" uid="uid://b6jjp77hs6kny" path="res://Assets/over.png" id="5_6k1lo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7vlio"]
 radius = 3.0
@@ -672,7 +675,8 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_mbq5b")
+script = ExtResource("1_iskqk")
+stamina_depletion_rate = 25.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.25, -1.7)
@@ -691,6 +695,31 @@ libraries = {
 "": SubResource("AnimationLibrary_txpy3")
 }
 autoplay = "handgun_idle"
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Stamina" type="TextureProgressBar" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -41.0
+offset_right = 142.0
+offset_bottom = -20.0
+grow_vertical = 0
+scale = Vector2(1.5, 1.5)
+texture_under = ExtResource("3_d6qts")
+texture_over = ExtResource("4_34wha")
+texture_progress = ExtResource("5_6k1lo")
 
 [connection signal="animation_changed" from="Sprite" to="." method="_on_sprite_animation_changed"]
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
