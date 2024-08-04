@@ -25,6 +25,7 @@ var target_rotation = 0.0
 
 const BULLET = preload("res://Scenes/bullet.tscn")
 @onready var world = $".."
+@onready var shot_timer = $ShotCooldown
 
 var stamina : float = 100.0
 var max_stamina : float = 100.0
@@ -89,12 +90,10 @@ func _on_animation_player_animation_finished(anim_name):
 func instantiate_bullet():
 	var bullet = BULLET.instantiate()
 	bullet.global_position = global_position
-	if scoped:
-		bullet.rotate(player.get_angle_to(get_global_mouse_position()))
-	else:
-		bullet.rotate(player.rotation)
+	bullet.rotate(player.rotation)
 	world.add_child(bullet)
 
 func handle_shooting():
-	if Input.is_action_just_pressed("shoot"):
-		instantiate_bullet()
+	if Input.is_action_pressed("shoot"):
+		while Input.is_action_pressed("shoot") and shot_timer.timeout:
+			instantiate_bullet()

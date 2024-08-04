@@ -675,6 +675,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 script = ExtResource("1_iskqk")
 stamina_depletion_rate = 25.0
 
@@ -720,6 +721,9 @@ scale = Vector2(1.5, 1.5)
 texture_under = ExtResource("3_d6qts")
 texture_over = ExtResource("4_34wha")
 texture_progress = ExtResource("5_6k1lo")
+
+[node name="ShotCooldown" type="Timer" parent="."]
+wait_time = 2.5
 
 [connection signal="animation_changed" from="Sprite" to="." method="_on_sprite_animation_changed"]
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
