@@ -14,7 +14,6 @@ extends CharacterBody2D
 @onready var anim_player = $AnimationPlayer
 @onready var stamina_bar = $UI/Control/Stamina
 @onready var camera = $Camera2D # Reference to the Camera2D node
-
 var equipped_weapon = "Pistol"
 var scoped : bool = false
 var shooting : bool = false
@@ -22,6 +21,8 @@ var reloading : bool = false
 var sprinting : bool = false
 var direction = Vector2.ZERO
 var target_rotation = 0.0
+var mag_size : int = 8
+var mag : int = 8
 
 const BULLET = preload("res://Scenes/bullet.tscn")
 @onready var world = $".."
@@ -88,12 +89,21 @@ func _on_animation_player_animation_finished(anim_name):
 		anim_player.play("handgun_move" if sprinting else "handgun_idle")
 
 func instantiate_bullet():
-	var bullet = BULLET.instantiate()
-	bullet.global_position = global_position
-	bullet.rotate(player.rotation)
-	world.add_child(bullet)
+	if mag <= mag_size and mag > 0:
+		var bullet = BULLET.instantiate()
+		bullet.global_position = global_position
+		bullet.rotate(player.rotation)
+		anim_player.play("handgun_shoot")
+		world.add_child(bullet)
+		mag -= 1
 
 func handle_shooting():
-	if Input.is_action_pressed("shoot"):
-		while Input.is_action_pressed("shoot") and shot_timer.timeout:
-			instantiate_bullet()
+	if Input.is_action_just_pressed("shoot") and shot_timer.is_stopped() and anim_player.current_animation != "handgun_reload":
+		instantiate_bullet()
+		shot_timer.start()
+
+func _on_shot_cooldown_timeout():
+	if Input.is_action_pressed("shoot") and anim_player.current_animation != "handgun_reload":
+		instantiate_bullet()
+		
+		shot_timer.start()
