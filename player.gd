@@ -10,6 +10,7 @@ extends CharacterBody2D
 @export var max_regen_rate : float = 1.0 # maximum regen rate for stamina
 @export var stamina_depletion_rate : float = 5.0 # stamina decrease rate per second during sprinting
 
+@onready var label = $UI/Control/Label
 @onready var player = $Sprite
 @onready var anim_player = $AnimationPlayer
 @onready var stamina_bar = $UI/Control/Stamina
@@ -59,8 +60,7 @@ func handle_movement(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, friction)
 
 	if Input.is_action_just_pressed("reload"):
-		if anim_player.current_animation != "handgun_reload" and anim_player.current_animation != "handgun_shoot":
-			anim_player.play("handgun_reload")
+		handle_reload()
 
 func handle_rotation(delta):
 	if Input.is_action_pressed("scoped"):
@@ -83,6 +83,12 @@ func regen_stamina(delta):
 	var regen = stamina_regen_rate * pow(2, stamina / max_stamina)
 	return min(regen, max_regen_rate)
 
+func handle_reload():
+	if mag < mag_size:
+		if anim_player.current_animation != "handgun_reload" and anim_player.current_animation != "handgun_shoot":
+			anim_player.play("handgun_reload")
+			mag += (mag_size - mag)
+			label.text = str(mag)+" | "+str(mag_size)
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "handgun_reload" or anim_name == "handgun_shoot":
@@ -96,14 +102,17 @@ func instantiate_bullet():
 		anim_player.play("handgun_shoot")
 		world.add_child(bullet)
 		mag -= 1
+	elif mag <= 0:
+		handle_reload()
 
 func handle_shooting():
 	if Input.is_action_just_pressed("shoot") and shot_timer.is_stopped() and anim_player.current_animation != "handgun_reload":
 		instantiate_bullet()
+		label.text = str(mag)+" | "+str(mag_size)
 		shot_timer.start()
 
 func _on_shot_cooldown_timeout():
 	if Input.is_action_pressed("shoot") and anim_player.current_animation != "handgun_reload":
 		instantiate_bullet()
-		
+		label.text = str(mag)+" | "+str(mag_size)
 		shot_timer.start()
