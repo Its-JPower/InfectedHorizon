@@ -6,8 +6,8 @@ extends CharacterBody2D
 @export var friction = 50.0 # variable for friction
 @export var rotation_speed: float = 5.0 # variable for smooth rotation speed
 @export var scoped_speed_reduction : float = 15.0 # variable for scoped speed reduction
-@export var stamina_regen_rate : float = 0.1 # lowest regen rate for stamina
-@export var max_regen_rate : float = 1.0 # maximum regen rate for stamina
+@export var stamina_regen_rate : float = 0.25 # lowest regen rate for stamina
+@export var max_regen_rate : float = 3.0 # maximum regen rate for stamina
 @export var stamina_depletion_rate : float = 5.0 # stamina decrease rate per second during sprinting
 
 @onready var label = $UI/Control/Label
