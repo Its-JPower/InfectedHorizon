@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://btpw5qixk7dk"]
+
+[ext_resource type="Script" path="res://Scenes/quit.gd" id="1_4jck6"]
+[ext_resource type="Script" path="res://Scenes/Start.gd" id="1_acm11"]
+
+[node name="Menu" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="Control" type="Control" parent="Camera2D/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Start" type="Button" parent="Camera2D/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -35.5
+offset_right = 125.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+script = ExtResource("1_acm11")
+
+[node name="Options" type="Button" parent="Camera2D/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_right = 125.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Options
+"
+
+[node name="Quit" type="Button" parent="Camera2D/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = 35.5
+offset_right = 125.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
+script = ExtResource("1_4jck6")

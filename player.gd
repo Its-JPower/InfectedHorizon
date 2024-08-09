@@ -24,6 +24,8 @@ var direction = Vector2.ZERO
 var target_rotation = 0.0
 var mag_size : int = 8
 var mag : int = 8
+var can_use_stamina = true
+
 
 const BULLET = preload("res://Scenes/bullet.tscn")
 @onready var world = $".."
@@ -49,7 +51,7 @@ func handle_movement(delta):
 		if Input.is_action_pressed("scoped") and scoped == false:
 			scoped = true
 			target_speed -= scoped_speed_reduction
-		elif Input.is_action_pressed("sprint") and stamina > 0:
+		elif Input.is_action_pressed("sprint") and stamina > 0 and can_use_stamina == true:
 			target_speed = sprint
 			stamina -= stamina_depletion_rate * delta  # Adjust stamina decrease rate
 			stamina = max(stamina, 0)  # Ensure stamina does not go below 0
@@ -71,7 +73,11 @@ func handle_rotation(delta):
 		player.rotation = lerp_angle(player.rotation, target_rotation, rotation_speed * delta)
 
 func handle_stamina(delta):
-	if Input.is_action_pressed("sprint"):
+	if stamina == 0:
+		can_use_stamina = false
+	elif stamina >= max_stamina:
+		can_use_stamina = true
+	if Input.is_action_pressed("sprint") and can_use_stamina == true:
 		stamina -= stamina_depletion_rate * delta # Decrease stamina over time while sprinting
 		stamina = max(stamina, 0) # Ensure stamina does not go below 0
 	else:
