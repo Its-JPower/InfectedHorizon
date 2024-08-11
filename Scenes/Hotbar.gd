@@ -10,14 +10,21 @@ signal GunSwapped
 var buttons = {"slot_1" : "_on_handgun_pressed", "slot_2" : "_on_rifle_pressed"}
 
 func _on_rifle_pressed():
-	player.equipped_weapon = "rifle"
-	print(player.equipped_weapon)
-	GunSwapped.emit()
+	if rifle.disabled == true:
+		pass
+	else:
+		player.equipped_weapon = "rifle"
+		print(player.equipped_weapon)
+		GunSwapped.emit()
+		handgun.flat = true
+		rifle.flat = false
 
 func _on_handgun_pressed():
 	player.equipped_weapon = "handgun"
 	print(player.equipped_weapon)
 	GunSwapped.emit()
+	handgun.flat = false
+	rifle.flat = true
 
 func _input(event):
 	if event.is_action_pressed("slot_1"):
