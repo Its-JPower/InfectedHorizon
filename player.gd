@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 
+@onready var audio = $Audio
 @export var speed : float = 100.0 # variable for normal speed
 @export var sprint : float = 150.0 # variable for speed when sprinting
 @export var acceleration : float = 40.0 # variable for acceleration
