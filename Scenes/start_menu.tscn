@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://btpw5qixk7dk"]
+[gd_scene load_steps=6 format=3 uid="uid://btpw5qixk7dk"]
 
 [ext_resource type="Script" path="res://Scenes/quit.gd" id="1_4jck6"]
 [ext_resource type="Script" path="res://Scenes/Start.gd" id="1_acm11"]
 [ext_resource type="Texture2D" uid="uid://vfn54hajmrmo" path="res://Assets/Backgorund/background.png" id="1_v22fa"]
 [ext_resource type="Texture2D" uid="uid://t0yfvamxcy08" path="res://Assets/Backgorund/title.png" id="2_hvwrl"]
+[ext_resource type="AudioStream" uid="uid://ckym3sneqs6wq" path="res://Assets/Audio/main_menu.mp3" id="5_a1fep"]
 
 [node name="Menu" type="Node2D"]
 
@@ -93,3 +94,21 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Quit"
 script = ExtResource("1_4jck6")
+
+[node name="Credits" type="RichTextLabel" parent="Camera2D/CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Made by ItsJPower 2024"
+fit_content = true
+scroll_active = false
+
+[node name="Menu Music" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("5_a1fep")
+autoplay = true
