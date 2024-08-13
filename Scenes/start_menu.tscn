@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://btpw5qixk7dk"]
+[gd_scene load_steps=9 format=3 uid="uid://btpw5qixk7dk"]
 
 [ext_resource type="Script" path="res://Scenes/quit.gd" id="1_4jck6"]
 [ext_resource type="Script" path="res://Scenes/Start.gd" id="1_acm11"]
 [ext_resource type="Texture2D" uid="uid://vfn54hajmrmo" path="res://Assets/Backgorund/background.png" id="1_v22fa"]
 [ext_resource type="Texture2D" uid="uid://t0yfvamxcy08" path="res://Assets/Backgorund/title.png" id="2_hvwrl"]
+[ext_resource type="Script" path="res://Scenes/options.gd" id="4_kuwfo"]
 [ext_resource type="AudioStream" uid="uid://ckym3sneqs6wq" path="res://Assets/Audio/main_menu.mp3" id="5_a1fep"]
+[ext_resource type="Script" path="res://Scenes/mainmusic_slider.gd" id="6_2iwly"]
+[ext_resource type="Script" path="res://Scenes/exitoptions.gd" id="7_2lc8l"]
 
 [node name="Menu" type="Node2D"]
 
@@ -34,7 +37,7 @@ offset_bottom = 274.0
 grow_horizontal = 2
 texture = ExtResource("2_hvwrl")
 
-[node name="Control" type="Control" parent="Camera2D/CanvasLayer"]
+[node name="Menu" type="Control" parent="Camera2D/CanvasLayer"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -48,7 +51,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Start" type="Button" parent="Camera2D/CanvasLayer/Control"]
+[node name="Start" type="Button" parent="Camera2D/CanvasLayer/Menu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -64,7 +67,7 @@ grow_vertical = 2
 text = "Play"
 script = ExtResource("1_acm11")
 
-[node name="Options" type="Button" parent="Camera2D/CanvasLayer/Control"]
+[node name="Options" type="Button" parent="Camera2D/CanvasLayer/Menu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -78,8 +81,9 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Options
 "
+script = ExtResource("4_kuwfo")
 
-[node name="Quit" type="Button" parent="Camera2D/CanvasLayer/Control"]
+[node name="Quit" type="Button" parent="Camera2D/CanvasLayer/Menu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -94,6 +98,52 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Quit"
 script = ExtResource("1_4jck6")
+
+[node name="Options" type="Control" parent="Camera2D/CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 288.0
+offset_top = 162.0
+offset_right = -288.0
+offset_bottom = -162.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/CanvasLayer/Options"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
+layout_mode = 2
+text = "Master  Volume"
+fit_content = true
+scroll_active = false
+
+[node name="MainMusic" type="HSlider" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
+layout_mode = 2
+min_value = -100.0
+max_value = 2.08165e-12
+script = ExtResource("6_2iwly")
+
+[node name="ExitOptions" type="Button" parent="Camera2D/CanvasLayer/Options"]
+layout_mode = 1
+offset_right = 37.0
+offset_bottom = 31.0
+text = "Exit
+"
+script = ExtResource("7_2lc8l")
 
 [node name="Credits" type="RichTextLabel" parent="Camera2D/CanvasLayer"]
 anchors_preset = 12
