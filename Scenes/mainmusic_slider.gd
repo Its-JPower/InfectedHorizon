@@ -4,5 +4,8 @@ extends HSlider
 @onready var menu_music = $"../../../../../Menu Music"
 
 func _value_changed(new_value):
-	menu_music.volume_db = new_value*(0.8)
+	if new_value == -100:
+		menu_music.volume_db = -80
+	else:
+		menu_music.volume_db = new_value*(0.15)
 	print(menu_music.volume_db)
