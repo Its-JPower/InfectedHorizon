@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 
-@onready var audio = $Audio
 @export var speed : float = 100.0 # variable for normal speed
 @export var sprint : float = 150.0 # variable for speed when sprinting
 @export var acceleration : float = 40.0 # variable for acceleration
@@ -11,7 +10,6 @@ extends CharacterBody2D
 @export var stamina_regen_rate : float = 0.25 # lowest regen rate for stamina
 @export var max_regen_rate : float = 3.0 # maximum regen rate for stamina
 @export var stamina_depletion_rate : float = 5.0 # stamina decrease rate per second during sprinting
-@onready var control = $UI/Control/Control
 @onready var label = $UI/Control/Ammo
 @onready var player = $Sprite
 @onready var anim_player = $AnimationPlayer
@@ -59,7 +57,6 @@ func _physics_process(delta):
 	handle_movement(delta)
 	handle_rotation(delta)
 	handle_stamina(delta)
-	handle_pause()
 	move_and_slide()
 
 func handle_movement(delta):
@@ -157,10 +154,6 @@ func _on_shot_cooldown_timeout():
 		instantiate_bullet()
 		shot_timer.start()
 
-func handle_pause():
-	if Input.is_action_just_pressed("pause"):
-		get_tree().paused = !get_tree().paused
-		control.visible = !control.visible
 
 func _on_hotbar_gun_swapped():
 	label.text = str(weapons[equipped_weapon]["bullets"])+"    "+str(weapons[equipped_weapon]["mag"])+" | "+str(weapons[equipped_weapon]["mag_size"])

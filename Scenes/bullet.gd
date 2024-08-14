@@ -6,7 +6,7 @@ extends Area2D
 @export var SPEED = 250
 
 func _ready():
-	audio.volume_db = Volume.bullet_volume
+	audio.volume_db = Volume.master_volume
 
 func _process(delta):
 	translate(Vector2.RIGHT.rotated(rotation) * SPEED * delta)
