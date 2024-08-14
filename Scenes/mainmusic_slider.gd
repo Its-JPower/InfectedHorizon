@@ -1,8 +1,7 @@
 extends HSlider
 
-
 @onready var menu_music = $"../../../../../Menu Music"
-@onready var bullet_audio = $Audio
+@onready var bullet_audio = get_node("/root/Bullet/Audio")
 
 func _value_changed(new_value):
 	if new_value == -100:
