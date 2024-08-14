@@ -1,4 +1,4 @@
-[gd_scene load_steps=144 format=3 uid="uid://c62d041f84rpk"]
+[gd_scene load_steps=147 format=3 uid="uid://c62d041f84rpk"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_iskqk"]
 [ext_resource type="Texture2D" uid="uid://crvhq76isgb8c" path="res://Assets/Player/player_rifle.png" id="2_ai7lf"]
@@ -7,10 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://cw53jsecxx8na" path="res://Assets/Progress Bars/e.png" id="4_w0p0c"]
 [ext_resource type="Texture2D" uid="uid://dajsmudksj1n5" path="res://Assets/Progress Bars/progress.png" id="5_k88wi"]
 [ext_resource type="Script" path="res://Scenes/Continue.gd" id="7_5ota3"]
-[ext_resource type="Script" path="res://Scenes/quit.gd" id="8_qj1ub"]
+[ext_resource type="Script" path="res://Scenes/options.gd" id="8_63ck8"]
+[ext_resource type="Script" path="res://Scenes/Quit.gd" id="8_vgfh2"]
 [ext_resource type="Script" path="res://Scenes/Hotbar.gd" id="9_78omu"]
 [ext_resource type="Texture2D" uid="uid://b52afnk0o5t0x" path="res://Assets/guns/Pistol.png" id="9_upvlj"]
 [ext_resource type="Texture2D" uid="uid://c4v077ucgwlej" path="res://Assets/guns/AR.png" id="10_wdeub"]
+[ext_resource type="Script" path="res://Scenes/mainmusic_slider.gd" id="12_4i1po"]
+[ext_resource type="Script" path="res://Scenes/exitoptions.gd" id="13_wfyj7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7vlio"]
 radius = 3.0
@@ -1245,6 +1248,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Options
 "
+script = ExtResource("8_63ck8")
 
 [node name="Quit" type="Button" parent="UI/Control/Control"]
 layout_mode = 1
@@ -1260,7 +1264,7 @@ offset_bottom = 66.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Quit"
-script = ExtResource("8_qj1ub")
+script = ExtResource("8_vgfh2")
 
 [node name="Hotbar" type="GridContainer" parent="UI/Control"]
 layout_mode = 1
@@ -1286,6 +1290,65 @@ icon = ExtResource("9_upvlj")
 layout_mode = 2
 icon = ExtResource("10_wdeub")
 flat = true
+
+[node name="Options" type="Control" parent="UI/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 288.0
+offset_top = 162.0
+offset_right = -288.0
+offset_bottom = -162.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Panel" type="Panel" parent="UI/Control/Options"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/Options"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 9.0
+offset_top = -21.0
+offset_right = -7.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Control/Options/VBoxContainer"]
+layout_mode = 2
+text = "Master  Volume"
+fit_content = true
+scroll_active = false
+
+[node name="MainMusic" type="HSlider" parent="UI/Control/Options/VBoxContainer"]
+layout_mode = 2
+min_value = -100.0
+max_value = 2.08165e-12
+script = ExtResource("12_4i1po")
+
+[node name="ExitOptions" type="Button" parent="UI/Control/Options"]
+layout_mode = 1
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 42.0
+offset_bottom = 36.0
+text = "Exit
+"
+script = ExtResource("13_wfyj7")
 
 [node name="ShotCooldown" type="Timer" parent="."]
 one_shot = true
