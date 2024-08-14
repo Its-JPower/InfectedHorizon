@@ -1,13 +1,13 @@
 extends Area2D
 
+
+@onready var audio = $Audio
 @onready var player = $"."
 @export var SPEED = 250
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
-	pass # Replace with function body.
+	audio.volume_db = Volume.bullet_volume
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	translate(Vector2.RIGHT.rotated(rotation) * SPEED * delta)
 

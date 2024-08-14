@@ -1179,10 +1179,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = -36.0
-offset_right = 136.0
-offset_bottom = -15.0
+offset_left = 10.0
+offset_top = -37.0001
+offset_right = 142.0
+offset_bottom = -16.0001
 grow_vertical = 0
 scale = Vector2(1.5, 1.5)
 texture_under = ExtResource("3_ake2w")
@@ -1202,7 +1202,7 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "64 |    8 | 8"
 
-[node name="Control" type="Control" parent="UI/Control"]
+[node name="Menu" type="Control" parent="UI/Control"]
 process_mode = 3
 visible = false
 layout_mode = 1
@@ -1218,7 +1218,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Continue" type="Button" parent="UI/Control/Control"]
+[node name="Continue" type="Button" parent="UI/Control/Menu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1234,7 +1234,7 @@ grow_vertical = 2
 text = "Continue"
 script = ExtResource("7_5ota3")
 
-[node name="Options" type="Button" parent="UI/Control/Control"]
+[node name="Options" type="Button" parent="UI/Control/Menu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1250,7 +1250,7 @@ text = "Options
 "
 script = ExtResource("8_63ck8")
 
-[node name="Quit" type="Button" parent="UI/Control/Control"]
+[node name="Quit" type="Button" parent="UI/Control/Menu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1274,9 +1274,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -58.0
-offset_top = -44.0
+offset_top = -45.0
 offset_right = 58.0
-offset_bottom = -4.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 0
 columns = 8
@@ -1292,6 +1292,7 @@ icon = ExtResource("10_wdeub")
 flat = true
 
 [node name="Options" type="Control" parent="UI/Control"]
+process_mode = 3
 visible = false
 layout_mode = 1
 anchors_preset = 15
