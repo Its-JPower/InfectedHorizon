@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 
+signal Shot
+
 @export var speed : float = 100.0 # variable for normal speed
 @export var sprint : float = 150.0 # variable for speed when sprinting
 @export var acceleration : float = 40.0 # variable for acceleration
@@ -135,6 +137,7 @@ func _on_animation_player_animation_finished(anim_name):
 func instantiate_bullet():
 	if weapons[equipped_weapon]["mag"] <= weapons[equipped_weapon]["mag_size"] and weapons[equipped_weapon]["mag"] > 0:
 		var bullet = BULLET.instantiate()
+		Shot.emit()
 		bullet.global_position = global_position
 		bullet.rotate(player.rotation)
 		anim_player.play(equipped_weapon+"_shoot")

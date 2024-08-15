@@ -1,15 +1,18 @@
 extends HSlider
 
+@export var bus_name: String
+var bus_index: int
 
-signal VolumeUpdate
+func _ready() -> void:
+	bus_index = AudioServer.get_bus_index(bus_name)
+	value_changed.connect(_on_value_changed)
 
-func _ready():
-	value = Volume.master_volume/0.2
+	value = db_to_linear(
+		AudioServer.get_bus_volume_db(bus_index)
+	)
 
-func _value_changed(new_value):
-	if new_value == -100:
-		Volume.master_volume = -80
-		VolumeUpdate.emit()
-	else:
-		Volume.master_volume = new_value*0.2
-		VolumeUpdate.emit()
+func _on_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(
+		bus_index,
+		linear_to_db(value)
+	)

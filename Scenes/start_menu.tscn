@@ -149,17 +149,45 @@ offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
+[node name="MasterText" type="RichTextLabel" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
 layout_mode = 2
 text = "Master  Volume"
 fit_content = true
 scroll_active = false
 
-[node name="MainMusic" type="HSlider" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
+[node name="Master" type="HSlider" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
 layout_mode = 2
-min_value = -100.0
-max_value = 2.08165e-12
+max_value = 1.0
+step = 0.001
+value = 1.0
 script = ExtResource("6_2iwly")
+bus_name = "Master"
+
+[node name="MusicText" type="RichTextLabel" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
+layout_mode = 2
+text = "Music  Volume"
+fit_content = true
+scroll_active = false
+
+[node name="Music" type="HSlider" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+script = ExtResource("6_2iwly")
+bus_name = "Music"
+
+[node name="Sfx" type="RichTextLabel" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
+layout_mode = 2
+text = "Sound Effects Volume"
+fit_content = true
+scroll_active = false
+
+[node name="SfxText" type="HSlider" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+script = ExtResource("6_2iwly")
+bus_name = "Sfx"
 
 [node name="ExitOptions" type="Button" parent="Camera2D/CanvasLayer/Options"]
 layout_mode = 1
@@ -188,6 +216,5 @@ scroll_active = false
 process_mode = 3
 stream = ExtResource("5_a1fep")
 autoplay = true
+bus = &"Music"
 script = ExtResource("9_keit0")
-
-[connection signal="VolumeUpdate" from="Camera2D/CanvasLayer/Options/VBoxContainer/MainMusic" to="Menu Music" method="_on_main_music_volume_update"]
