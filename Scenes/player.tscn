@@ -1,4 +1,4 @@
-[gd_scene load_steps=147 format=3 uid="uid://c62d041f84rpk"]
+[gd_scene load_steps=148 format=3 uid="uid://c62d041f84rpk"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_iskqk"]
 [ext_resource type="Texture2D" uid="uid://crvhq76isgb8c" path="res://Assets/Player/player_rifle.png" id="2_ai7lf"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://c4v077ucgwlej" path="res://Assets/guns/AR.png" id="10_wdeub"]
 [ext_resource type="Script" path="res://Scenes/mainmusic_slider.gd" id="12_4i1po"]
 [ext_resource type="Script" path="res://Scenes/exitoptions.gd" id="13_wfyj7"]
+[ext_resource type="Script" path="res://Scenes/Resolution.gd" id="14_pi6wr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7vlio"]
 radius = 3.0
@@ -905,7 +906,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"rifle_shoot",
-"speed": 15.0
+"speed": 20.0
 }]
 
 [sub_resource type="Animation" id="Animation_d4kvs"]
@@ -1100,7 +1101,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_8as8g"]
-length = 0.2
+length = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1108,7 +1109,7 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333),
+"times": PackedFloat32Array(0, 0.05, 0.1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 2]
@@ -1150,7 +1151,7 @@ shape = SubResource("CircleShape2D_7vlio")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.08, 0.08)
 sprite_frames = SubResource("SpriteFrames_3btn3")
-animation = &"rifle_idle"
+animation = &"handgun_idle"
 autoplay = "handgun_idle"
 offset = Vector2(30.9375, -24.25)
 
@@ -1357,7 +1358,7 @@ bus_name = "Music"
 
 [node name="SfxText" type="RichTextLabel" parent="UI/Control/Options/VBoxContainer"]
 layout_mode = 2
-text = "Sound Effects  Volume"
+text = "Sound Effects Volume"
 fit_content = true
 scroll_active = false
 
@@ -1367,6 +1368,34 @@ max_value = 1.0
 step = 0.001
 script = ExtResource("12_4i1po")
 bus_name = "Sfx"
+
+[node name="AmbienceText" type="RichTextLabel" parent="UI/Control/Options/VBoxContainer"]
+layout_mode = 2
+text = "Ambience Volume"
+fit_content = true
+scroll_active = false
+
+[node name="Ambience" type="HSlider" parent="UI/Control/Options/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+script = ExtResource("12_4i1po")
+bus_name = "Ambience"
+
+[node name="HSeparator" type="HSeparator" parent="UI/Control/Options/VBoxContainer"]
+layout_mode = 2
+
+[node name="Resolution" type="OptionButton" parent="UI/Control/Options/VBoxContainer"]
+layout_mode = 2
+item_count = 3
+selected = 2
+popup/item_0/text = "1920x1080"
+popup/item_0/id = 0
+popup/item_1/text = "1600x900"
+popup/item_1/id = 2
+popup/item_2/text = "1280x720"
+popup/item_2/id = 1
+script = ExtResource("14_pi6wr")
 
 [node name="ExitOptions" type="Button" parent="UI/Control/Options"]
 layout_mode = 1
@@ -1385,4 +1414,5 @@ one_shot = true
 [connection signal="GunSwapped" from="UI/Control/Hotbar" to="." method="_on_hotbar_gun_swapped"]
 [connection signal="pressed" from="UI/Control/Hotbar/handgun" to="UI/Control/Hotbar" method="_on_handgun_pressed"]
 [connection signal="pressed" from="UI/Control/Hotbar/rifle" to="UI/Control/Hotbar" method="_on_rifle_pressed"]
+[connection signal="item_selected" from="UI/Control/Options/VBoxContainer/Resolution" to="UI/Control/Options/VBoxContainer/Resolution" method="_on_item_selected"]
 [connection signal="timeout" from="ShotCooldown" to="." method="_on_shot_cooldown_timeout"]

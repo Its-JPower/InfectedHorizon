@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://btpw5qixk7dk"]
+[gd_scene load_steps=11 format=3 uid="uid://btpw5qixk7dk"]
 
 [ext_resource type="Script" path="res://Scenes/Start.gd" id="1_acm11"]
 [ext_resource type="Texture2D" uid="uid://vfn54hajmrmo" path="res://Assets/Backgorund/background.png" id="1_v22fa"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scenes/Quit.gd" id="5_bmp2t"]
 [ext_resource type="Script" path="res://Scenes/mainmusic_slider.gd" id="6_2iwly"]
 [ext_resource type="Script" path="res://Scenes/exitoptions.gd" id="7_2lc8l"]
+[ext_resource type="Script" path="res://Scenes/Resolution.gd" id="7_3ad7h"]
 [ext_resource type="Script" path="res://Scenes/Menu Music.gd" id="9_keit0"]
 
 [node name="Menu" type="Node2D"]
@@ -189,6 +190,34 @@ step = 0.001
 script = ExtResource("6_2iwly")
 bus_name = "Sfx"
 
+[node name="AmbienceText" type="RichTextLabel" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
+layout_mode = 2
+text = "Sound Effects  Volume"
+fit_content = true
+scroll_active = false
+
+[node name="Ambience" type="HSlider" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+script = ExtResource("6_2iwly")
+bus_name = "Ambience"
+
+[node name="HSeparator" type="HSeparator" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
+layout_mode = 2
+
+[node name="Resolution" type="OptionButton" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
+layout_mode = 2
+item_count = 3
+selected = 2
+popup/item_0/text = "1920x1080"
+popup/item_0/id = 0
+popup/item_1/text = "1600x900"
+popup/item_1/id = 2
+popup/item_2/text = "1280x720"
+popup/item_2/id = 1
+script = ExtResource("7_3ad7h")
+
 [node name="ExitOptions" type="Button" parent="Camera2D/CanvasLayer/Options"]
 layout_mode = 1
 offset_left = 5.0
@@ -218,3 +247,5 @@ stream = ExtResource("5_a1fep")
 autoplay = true
 bus = &"Music"
 script = ExtResource("9_keit0")
+
+[connection signal="item_selected" from="Camera2D/CanvasLayer/Options/VBoxContainer/Resolution" to="Camera2D/CanvasLayer/Options/VBoxContainer/Resolution" method="_on_item_selected"]
