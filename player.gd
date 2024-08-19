@@ -13,7 +13,7 @@ signal Shot
 @export var max_regen_rate : float = 3.0 # maximum regen rate for stamina
 @export var stamina_depletion_rate : float = 5.0 # stamina decrease rate per second during sprinting
 @onready var label = $UI/Control/Ammo
-@onready var player = $Sprite
+@onready var player: CharacterBody2D = $"."
 @onready var anim_player = $AnimationPlayer
 @onready var stamina_bar = $UI/Control/Stamina
 @onready var camera = $Camera2D # Reference to the Camera2D node
@@ -89,11 +89,11 @@ func handle_rotation(delta):
 	if Input.is_action_pressed("scoped"):
 		rotation_speed = 10.0
 		target_rotation = get_angle_to(get_global_mouse_position())
-		rotation = lerp_angle(rotation, target_rotation, rotation_speed * delta)
+		player.rotation = lerp_angle(player.rotation, target_rotation, rotation_speed * delta)
 	elif velocity != Vector2.ZERO:
 		rotation_speed = 7.5
 		target_rotation = direction.angle()
-		rotation = lerp_angle(rotation, target_rotation, rotation_speed * delta)
+		player.rotation = lerp_angle(player.rotation, target_rotation, rotation_speed * delta)
 
 func handle_stamina(delta):
 	if stamina == 0:
