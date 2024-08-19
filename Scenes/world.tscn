@@ -115,6 +115,5 @@ bus = &"Ambience"
 
 [node name="Zombie" parent="." instance=ExtResource("4_t7lyv")]
 position = Vector2(234, -4)
-speed = null
 
 [connection signal="Shot" from="Player" to="Player/Camera2D" method="_on_player_shot"]

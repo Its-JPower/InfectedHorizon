@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://dx68f7vkrennh"]
+[gd_scene load_steps=52 format=3 uid="uid://dx68f7vkrennh"]
 
 [ext_resource type="Script" path="res://zombie.gd" id="1_bh3p0"]
 [ext_resource type="Texture2D" uid="uid://bw8e76g0d4xji" path="res://Assets/zombie.png" id="2_mhpws"]
@@ -8,6 +8,9 @@ radius = 46.6667
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iib0d"]
 radius = 676.618
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2s2nr"]
+radius = 50.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fup3u"]
 atlas = ExtResource("2_mhpws")
@@ -408,7 +411,6 @@ _data = {
 scale = Vector2(0.3, 0.3)
 collision_mask = 0
 script = ExtResource("1_bh3p0")
-speed = 110
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1d4s5")
@@ -420,9 +422,16 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_iib0d")
 
+[node name="DetectionArea2" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea2"]
+shape = SubResource("CircleShape2D_2s2nr")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jgyn3")
-animation = &"idle"
+animation = &"attack"
 autoplay = "idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -432,4 +441,6 @@ libraries = {
 autoplay = "idle"
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_entered" from="DetectionArea2" to="." method="_on_detection_area_2_body_entered"]
+[connection signal="body_exited" from="DetectionArea2" to="." method="_on_detection_area_2_body_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

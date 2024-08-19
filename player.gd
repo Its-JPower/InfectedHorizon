@@ -89,11 +89,11 @@ func handle_rotation(delta):
 	if Input.is_action_pressed("scoped"):
 		rotation_speed = 10.0
 		target_rotation = get_angle_to(get_global_mouse_position())
-		player.rotation = lerp_angle(player.rotation, target_rotation, rotation_speed * delta)
+		rotation = lerp_angle(rotation, target_rotation, rotation_speed * delta)
 	elif velocity != Vector2.ZERO:
 		rotation_speed = 7.5
 		target_rotation = direction.angle()
-		player.rotation = lerp_angle(player.rotation, target_rotation, rotation_speed * delta)
+		rotation = lerp_angle(rotation, target_rotation, rotation_speed * delta)
 
 func handle_stamina(delta):
 	if stamina == 0:
