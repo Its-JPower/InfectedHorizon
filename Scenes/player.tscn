@@ -16,9 +16,6 @@
 [ext_resource type="Script" path="res://Scenes/exitoptions.gd" id="13_wfyj7"]
 [ext_resource type="Script" path="res://Scenes/Resolution.gd" id="14_pi6wr"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7vlio"]
-radius = 3.0
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_kibkg"]
 atlas = ExtResource("2_vry05")
 region = Rect2(0, 0, 150, 100)
@@ -909,6 +906,10 @@ animations = [{
 "speed": 20.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_syva0"]
+radius = 3.0
+height = 8.0
+
 [sub_resource type="Animation" id="Animation_d4kvs"]
 length = 1.33333
 loop_mode = 1
@@ -1145,16 +1146,17 @@ collision_layer = 3
 script = ExtResource("1_iskqk")
 stamina_depletion_rate = 25.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.25, -1.7)
-shape = SubResource("CircleShape2D_7vlio")
-
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.08, 0.08)
 sprite_frames = SubResource("SpriteFrames_3btn3")
 animation = &"handgun_idle"
 autoplay = "handgun_idle"
 offset = Vector2(30.9375, -24.25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -1.5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_syva0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

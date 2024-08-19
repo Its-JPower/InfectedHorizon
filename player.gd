@@ -7,36 +7,32 @@ signal Shot
 @export var sprint : float = 150.0 # variable for speed when sprinting
 @export var acceleration : float = 40.0 # variable for acceleration
 @export var friction = 50.0 # variable for friction
-@export var rotation_speed: float = 7.5 # variable for smooth rotation speed
 @export var scoped_speed_reduction : float = 15.0 # variable for scoped speed reduction
 @export var stamina_regen_rate : float = 0.25 # lowest regen rate for stamina
 @export var max_regen_rate : float = 3.0 # maximum regen rate for stamina
 @export var stamina_depletion_rate : float = 5.0 # stamina decrease rate per second during sprinting
 @onready var label = $UI/Control/Ammo
-@onready var player: CharacterBody2D = $"."
+@onready var player = $"."
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var anim_player = $AnimationPlayer
 @onready var stamina_bar = $UI/Control/Stamina
 @onready var camera = $Camera2D # Reference to the Camera2D node
-var weapons = {
-	"rifle": {"mag": 30, "mag_size": 30, "bullets": 120, "cooldown": 0.1},
-	"handgun": {"mag": 8, "mag_size": 8, "bullets": 64, "cooldown": 1.0}}
 var equipped_weapon = "handgun"
 var scoped : bool = false
 var shooting : bool = false
 var reloading : bool = false
 var sprinting : bool = false
 var direction = Vector2.ZERO
-var target_rotation = 0.0
 var can_use_stamina = true
 @onready var world = $".."
 @onready var shot_timer = $ShotCooldown
 @onready var hotbar_buttons = []
-var stamina : float = 100.0
-var max_stamina : float = 100.0
 const BULLET = preload("res://Scenes/bullet.tscn")
+var rotation_speed = 7.5
+var target_rotation = 0.0
 
 func _ready():
-	stamina_bar.value = stamina
+	stamina_bar.value = PlayerStats.stamina
 	var grid_container = $UI/Control/Hotbar
 	for button in grid_container.get_children():
 		if button is Button:
@@ -68,10 +64,10 @@ func handle_movement(delta):
 		if Input.is_action_pressed("scoped") and scoped == false:
 			scoped = true
 			target_speed -= scoped_speed_reduction
-		elif Input.is_action_pressed("sprint") and stamina > 0 and can_use_stamina == true:
+		elif Input.is_action_pressed("sprint") and PlayerStats.stamina > 0 and can_use_stamina == true:
 			target_speed = sprint
-			stamina -= stamina_depletion_rate * delta  # Adjust stamina decrease rate
-			stamina = max(stamina, 0)  # Ensure stamina does not go below 0
+			PlayerStats.stamina -= stamina_depletion_rate * delta  # Adjust stamina decrease rate
+			PlayerStats.stamina = max(PlayerStats.stamina, 0)  # Ensure stamina does not go below 0
 		else:
 			scoped = false
 		velocity = velocity.move_toward(direction * target_speed, acceleration)
@@ -88,28 +84,30 @@ func handle_movement(delta):
 func handle_rotation(delta):
 	if Input.is_action_pressed("scoped"):
 		rotation_speed = 10.0
-		target_rotation = get_angle_to(get_global_mouse_position())
-		player.rotation = lerp_angle(player.rotation, target_rotation, rotation_speed * delta)
-	elif velocity != Vector2.ZERO:
+		var mouse_position = get_global_mouse_position()
+		target_rotation = (mouse_position - global_position).angle()
+	elif velocity.length() > 0:
 		rotation_speed = 7.5
-		target_rotation = direction.angle()
-		player.rotation = lerp_angle(player.rotation, target_rotation, rotation_speed * delta)
+		target_rotation = velocity.angle()
+	else:
+		return
+	rotation = lerp_angle(rotation, target_rotation, rotation_speed * delta)
 
 func handle_stamina(delta):
-	if stamina == 0:
+	if PlayerStats.stamina == 0:
 		can_use_stamina = false
-	elif stamina >= max_stamina:
+	elif PlayerStats.stamina >= PlayerStats.max_stamina:
 		can_use_stamina = true
 	if Input.is_action_pressed("sprint") and can_use_stamina == true:
-		stamina -= stamina_depletion_rate * delta # Decrease stamina over time while sprinting
-		stamina = max(stamina, 0) # Ensure stamina does not go below 0
+		PlayerStats.stamina -= stamina_depletion_rate * delta # Decrease stamina when sprinting
+		PlayerStats.stamina = max(PlayerStats.stamina, 0) # Make sure stamina does not go below 0
 	else:
-		stamina += regen_stamina(delta) # Regenerate stamina only if not sprinting
-		stamina = min(stamina, max_stamina) # Ensure stamina does not exceed max_stamina
-	stamina_bar.value = stamina # Update stamina bar to reflect stamina value
+		PlayerStats.stamina += regen_stamina(delta) # Regenerate stamina only if not sprinting
+		PlayerStats.stamina = min(PlayerStats.stamina, PlayerStats.max_stamina) # Ensure stamina does not exceed max stamina
+	stamina_bar.value = PlayerStats.stamina # Update stamina bar
 
 func regen_stamina(_delta):
-	var regen = stamina_regen_rate * pow(2, stamina / max_stamina)
+	var regen = stamina_regen_rate * pow(2, PlayerStats.stamina / PlayerStats.max_stamina)
 	return min(regen, max_regen_rate)
 
 func handle_reload():
@@ -135,16 +133,16 @@ func _on_animation_player_animation_finished(anim_name):
 		label.text = str(weapons[equipped_weapon]["bullets"])+"    "+str(weapons[equipped_weapon]["mag"])+" | "+str(weapons[equipped_weapon]["mag_size"])
 
 func instantiate_bullet():
-	if weapons[equipped_weapon]["mag"] <= weapons[equipped_weapon]["mag_size"] and weapons[equipped_weapon]["mag"] > 0:
+	if PlayerStats.weapons[equipped_weapon]["mag"] <= PlayerStats.weapons[equipped_weapon]["mag_size"] and PlayerStats.weapons[equipped_weapon]["mag"] > 0:
 		var bullet = BULLET.instantiate()
 		Shot.emit()
 		bullet.global_position = global_position
 		bullet.rotate(player.rotation)
 		anim_player.play(equipped_weapon+"_shoot")
 		world.add_child(bullet)
-		weapons[equipped_weapon]["mag"] -= 1
-		label.text = str(weapons[equipped_weapon]["bullets"])+"    "+str(weapons[equipped_weapon]["mag"])+" | "+str(weapons[equipped_weapon]["mag_size"])
-	elif weapons[equipped_weapon]["mag"] <= 0:
+		PlayerStats.weapons[equipped_weapon]["mag"] -= 1
+		label.text = str(PlayerStats.weapons[equipped_weapon]["bullets"])+"    "+str(PlayerStats.weapons[equipped_weapon]["mag"])+" | "+str(PlayerStats.weapons[equipped_weapon]["mag_size"])
+	elif PlayerStats.weapons[equipped_weapon]["mag"] <= 0:
 		handle_reload()
 
 func handle_shooting():
@@ -159,5 +157,5 @@ func _on_shot_cooldown_timeout():
 
 
 func _on_hotbar_gun_swapped():
-	label.text = str(weapons[equipped_weapon]["bullets"])+"    "+str(weapons[equipped_weapon]["mag"])+" | "+str(weapons[equipped_weapon]["mag_size"])
-	shot_timer.wait_time = weapons[equipped_weapon]["cooldown"]
+	label.text = str(PlayerStats.weapons[equipped_weapon]["bullets"])+"    "+str(PlayerStats.weapons[equipped_weapon]["mag"])+" | "+str(PlayerStats.weapons[equipped_weapon]["mag_size"])
+	shot_timer.wait_time = PlayerStats.weapons[equipped_weapon]["cooldown"]
