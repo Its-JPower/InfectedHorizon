@@ -1,9 +1,11 @@
 extends CharacterBody2D
 
+
 @export var speed = 110
 var player_chase = false
 var player: Node2D = null
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
+
 
 func _physics_process(delta: float) -> void:
 	if player_chase and player != null:
@@ -33,9 +35,11 @@ func handle_attack(attack_origin : int):
 		if PlayerStats.health - PlayerStats.damage[attack_origin] <= 0:
 			PlayerStats.health -= PlayerStats.damage[attack_origin]
 			PlayerStats.health = min(PlayerStats.health, 0)
+			PlayerStats.UpdateHealth.emit()
 			PlayerStats.die(attack_origin)
 		else:
 			PlayerStats.health -= PlayerStats.damage[attack_origin]
+			PlayerStats.UpdateHealth.emit()
 			print(PlayerStats.health)
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

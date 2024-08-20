@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 signal Shot
 
+@onready var health_bar: TextureProgressBar = $UI/Control/Health
 @export var speed : float = 100.0 # variable for normal speed
 @export var sprint : float = 150.0 # variable for speed when sprinting
 @export var acceleration : float = 40.0 # variable for acceleration
@@ -27,7 +28,7 @@ var can_use_stamina = true
 @onready var world = $".."
 @onready var shot_timer = $ShotCooldown
 @onready var hotbar_buttons = []
-const pistol_bullet = preload("res://Scenes/pistol_bullet.tscn")
+const handgun_bullet = preload("res://Scenes/handgun_bullet.tscn")
 const rifle_bullet = preload("res://Scenes/rifle_bullet.tscn")
 var rotation_speed = 7.5
 var target_rotation = 0.0
@@ -53,10 +54,12 @@ func is_click_on_hotbar(mouse_position):
 	return false
 
 func _physics_process(delta):
+	health_bar.value = lerp(health_bar.value, PlayerStats.health, 1.0)
 	handle_movement(delta)
 	handle_rotation(delta)
 	handle_stamina(delta)
 	move_and_slide()
+	
 
 func handle_movement(delta):
 	direction = Input.get_vector("left", "right", "up", "down").normalized()
@@ -135,7 +138,11 @@ func _on_animation_player_animation_finished(anim_name):
 
 func instantiate_bullet():
 	if PlayerStats.weapons[equipped_weapon]["mag"] <= PlayerStats.weapons[equipped_weapon]["mag_size"] and PlayerStats.weapons[equipped_weapon]["mag"] > 0:
-		var bullet = equipped_weapon+str_to_va"_bullet".instantiate()
+		var bullet
+		match equipped_weapon:
+			"handgun": bullet = handgun_bullet.instantiate()
+			"rifle": bullet = rifle_bullet.instantiate()
+		print(str(equipped_weapon+"_bullet"))
 		Shot.emit()
 		bullet.global_position = global_position
 		bullet.rotate(player.rotation)
@@ -156,7 +163,9 @@ func _on_shot_cooldown_timeout():
 		instantiate_bullet()
 		shot_timer.start()
 
-
 func _on_hotbar_gun_swapped():
 	label.text = str(PlayerStats.weapons[equipped_weapon]["bullets"])+"    "+str(PlayerStats.weapons[equipped_weapon]["mag"])+" | "+str(PlayerStats.weapons[equipped_weapon]["mag_size"])
 	shot_timer.wait_time = PlayerStats.weapons[equipped_weapon]["cooldown"]
+
+func handle_health():
+	pass
