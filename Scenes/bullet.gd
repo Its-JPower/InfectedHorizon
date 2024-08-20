@@ -2,7 +2,7 @@ extends Area2D
 
 
 @onready var player = $"."
-@export var SPEED = 250
+@export var SPEED = 300
 
 func _process(delta):
 	translate(Vector2.RIGHT.rotated(rotation) * SPEED * delta)

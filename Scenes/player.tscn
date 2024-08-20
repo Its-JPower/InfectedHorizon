@@ -1144,6 +1144,13 @@ _data = {
 z_index = 1
 collision_layer = 3
 script = ExtResource("1_iskqk")
+speed = null
+sprint = null
+acceleration = null
+friction = null
+scoped_speed_reduction = null
+stamina_regen_rate = null
+max_regen_rate = null
 stamina_depletion_rate = 25.0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]

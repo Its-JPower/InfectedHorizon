@@ -26,6 +26,18 @@ func _physics_process(delta: float) -> void:
 		if not anim_player.current_animation == "attack":
 			anim_player.play("idle")
 
+func handle_attack(attack_origin : int):
+	if anim_player.current_animation != "attack":
+		anim_player.play("attack")
+		await anim_player.animation_finished
+		if PlayerStats.health - PlayerStats.damage[attack_origin] <= 0:
+			PlayerStats.health -= PlayerStats.damage[attack_origin]
+			PlayerStats.health = min(PlayerStats.health, 0)
+			PlayerStats.die(attack_origin)
+		else:
+			PlayerStats.health -= PlayerStats.damage[attack_origin]
+			print(PlayerStats.health)
+
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "attack" and velocity != Vector2.ZERO:
 		anim_player.play("move")
@@ -36,17 +48,15 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 	player = body
 	player_chase = true
 
-
 func _on_detection_area_2_body_entered(body: Node2D) -> void:
 	if body == player:
 		speed = 100
 		player_chase = false
 		velocity = Vector2.ZERO
-		anim_player.play("attack")
+		handle_attack(0)
 	else:
 		player = body
 		player_chase = true
-		anim_player.play("attack")
 
 func _on_detection_area_2_body_exited(body: Node2D) -> void:
 	player = body

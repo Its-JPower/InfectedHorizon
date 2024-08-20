@@ -93,13 +93,6 @@ sources/0 = SubResource("TileSetAtlasSource_h1kj2")
 [node name="Player" parent="." instance=ExtResource("1_oxrfq")]
 position = Vector2(2, 3)
 scale = Vector2(4, 4)
-speed = null
-sprint = null
-acceleration = null
-friction = null
-scoped_speed_reduction = null
-stamina_regen_rate = null
-max_regen_rate = null
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(4, 4)
