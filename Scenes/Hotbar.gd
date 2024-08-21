@@ -4,7 +4,6 @@ signal GunSwapped
 
 @onready var handgun = $handgun
 @onready var rifle = $rifle
-@onready var player = $"../../.."
 @onready var sprite = $"../../../Sprite"
 @onready var anim_player = $"../../../AnimationPlayer"
 
@@ -12,18 +11,18 @@ signal GunSwapped
 var buttons = {"slot_1" : "_on_handgun_pressed", "slot_2" : "_on_rifle_pressed"}
 
 func _on_rifle_pressed(delta):
-	if not rifle.disabled and anim_player.current_animation != player.equipped_weapon+"_reload":
-		player.equipped_weapon = "rifle"
-		print(player.equipped_weapon)
+	if not rifle.disabled and anim_player.current_animation != PlayerStats.equipped_weapon+"_reload":
+		PlayerStats.equipped_weapon = "rifle"
+		print(PlayerStats.equipped_weapon)
 		GunSwapped.emit()
 		handgun.flat = true
 		rifle.flat = false
 		sprite.offset = lerp(Vector2(30.938,-15), Vector2(30.938,-24.25), 2.5 * delta)
 
 func _on_handgun_pressed(delta):
-	if anim_player.current_animation != player.equipped_weapon+"_reload":
-		player.equipped_weapon = "handgun"
-		print(player.equipped_weapon)
+	if anim_player.current_animation != PlayerStats.equipped_weapon+"_reload":
+		PlayerStats.equipped_weapon = "handgun"
+		print(PlayerStats.equipped_weapon)
 		GunSwapped.emit()
 		handgun.flat = false
 		rifle.flat = true

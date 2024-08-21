@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var speed = 110
 var player_chase = false
 var player: Node2D = null
+@export var health: float = 100.0
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 
 
@@ -58,6 +59,9 @@ func _on_detection_area_2_body_entered(body: Node2D) -> void:
 		player_chase = false
 		velocity = Vector2.ZERO
 		handle_attack(0)
+	elif body.is_in_group("ZombieHurt"):
+		health -= PlayerStats.weapons[PlayerStats.equipped_weapon]["damage"]
+		print(health)
 	else:
 		player = body
 		player_chase = true

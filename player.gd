@@ -18,7 +18,6 @@ signal Shot
 @onready var anim_player = $AnimationPlayer
 @onready var stamina_bar = $UI/Control/Stamina
 @onready var camera = $Camera2D # Reference to the Camera2D node
-var equipped_weapon = "handgun"
 var scoped : bool = false
 var shooting : bool = false
 var reloading : bool = false
@@ -77,10 +76,10 @@ func handle_movement(delta):
 		velocity = velocity.move_toward(direction * target_speed, acceleration)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction)
-	if velocity == Vector2.ZERO and anim_player.current_animation != equipped_weapon+"_reload" and anim_player.current_animation != equipped_weapon+"_shoot":
-		anim_player.play(equipped_weapon+"_idle")
-	elif velocity != Vector2.ZERO and anim_player.current_animation != equipped_weapon+"_reload" and anim_player.current_animation != equipped_weapon+"_shoot":
-		anim_player.play(equipped_weapon+"_move")
+	if velocity == Vector2.ZERO and anim_player.current_animation != PlayerStats.equipped_weapon+"_reload" and anim_player.current_animation != PlayerStats.equipped_weapon+"_shoot":
+		anim_player.play(PlayerStats.equipped_weapon+"_idle")
+	elif velocity != Vector2.ZERO and anim_player.current_animation != PlayerStats.equipped_weapon+"_reload" and anim_player.current_animation != PlayerStats.equipped_weapon+"_shoot":
+		anim_player.play(PlayerStats.equipped_weapon+"_move")
 
 	if Input.is_action_just_pressed("reload"):
 		handle_reload()
@@ -115,57 +114,57 @@ func regen_stamina(_delta):
 	return min(regen, max_regen_rate)
 
 func handle_reload():
-	if PlayerStats.weapons[equipped_weapon]["mag"] < PlayerStats.weapons[equipped_weapon]["mag_size"]:
-		if anim_player.current_animation != equipped_weapon+"_reload" and anim_player.current_animation != equipped_weapon+"_shoot" and PlayerStats.weapons[equipped_weapon]["bullets"] > 0:
-			anim_player.play(equipped_weapon+"_reload")
-			if PlayerStats.weapons[equipped_weapon]["bullets"] - ((PlayerStats.weapons[equipped_weapon]["mag_size"] - PlayerStats.weapons[equipped_weapon]["mag"])) < 0:
-				PlayerStats.weapons[equipped_weapon]["mag"] += PlayerStats.weapons[equipped_weapon]["bullets"]
-				PlayerStats.weapons[equipped_weapon]["bullets"] = 0
+	if PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"] < PlayerStats.weapons[PlayerStats.equipped_weapon]["mag_size"]:
+		if anim_player.current_animation != PlayerStats.equipped_weapon+"_reload" and anim_player.current_animation != PlayerStats.equipped_weapon+"_shoot" and PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"] > 0:
+			anim_player.play(PlayerStats.equipped_weapon+"_reload")
+			if PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"] - ((PlayerStats.weapons[PlayerStats.equipped_weapon]["mag_size"] - PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"])) < 0:
+				PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"] += PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"]
+				PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"] = 0
 			else:
-				PlayerStats.weapons[equipped_weapon]["bullets"] -= (PlayerStats.weapons[equipped_weapon]["mag_size"] - PlayerStats.weapons[equipped_weapon]["mag"])
-				PlayerStats.weapons[equipped_weapon]["mag"] += (PlayerStats.weapons[equipped_weapon]["mag_size"] - PlayerStats.weapons[equipped_weapon]["mag"])
-				print(PlayerStats.weapons[equipped_weapon]["bullets"])
+				PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"] -= (PlayerStats.weapons[PlayerStats.equipped_weapon]["mag_size"] - PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"])
+				PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"] += (PlayerStats.weapons[PlayerStats.equipped_weapon]["mag_size"] - PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"])
+				print(PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"])
 
 func _on_animation_player_animation_finished(anim_name):
-	if anim_name == equipped_weapon+"_reload" or anim_name == equipped_weapon+"_shoot":
-		if anim_name == equipped_weapon+"_reload":
+	if anim_name == PlayerStats.equipped_weapon+"_reload" or anim_name == PlayerStats.equipped_weapon+"_shoot":
+		if anim_name == PlayerStats.equipped_weapon+"_reload":
 			shot_timer.start()
 		if velocity != Vector2.ZERO:
-			anim_player.play(equipped_weapon+"_move")
+			anim_player.play(PlayerStats.equipped_weapon+"_move")
 		else:
-			anim_player.play(equipped_weapon+"_idle")
-		label.text = str(PlayerStats.weapons[equipped_weapon]["bullets"])+"    "+str(PlayerStats.weapons[equipped_weapon]["mag"])+" | "+str(PlayerStats.weapons[equipped_weapon]["mag_size"])
+			anim_player.play(PlayerStats.equipped_weapon+"_idle")
+		label.text = str(PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"])+"    "+str(PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"])+" | "+str(PlayerStats.weapons[PlayerStats.equipped_weapon]["mag_size"])
 
 func instantiate_bullet():
-	if PlayerStats.weapons[equipped_weapon]["mag"] <= PlayerStats.weapons[equipped_weapon]["mag_size"] and PlayerStats.weapons[equipped_weapon]["mag"] > 0:
+	if PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"] <= PlayerStats.weapons[PlayerStats.equipped_weapon]["mag_size"] and PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"] > 0:
 		var bullet
-		match equipped_weapon:
+		match PlayerStats.equipped_weapon:
 			"handgun": bullet = handgun_bullet.instantiate()
 			"rifle": bullet = rifle_bullet.instantiate()
-		print(str(equipped_weapon+"_bullet"))
+		print(str(PlayerStats.equipped_weapon+"_bullet"))
 		Shot.emit()
 		bullet.global_position = global_position
 		bullet.rotate(player.rotation)
-		anim_player.play(equipped_weapon+"_shoot")
+		anim_player.play(PlayerStats.equipped_weapon+"_shoot")
 		world.add_child(bullet)
-		PlayerStats.weapons[equipped_weapon]["mag"] -= 1
-		label.text = str(PlayerStats.weapons[equipped_weapon]["bullets"])+"    "+str(PlayerStats.weapons[equipped_weapon]["mag"])+" | "+str(PlayerStats.weapons[equipped_weapon]["mag_size"])
-	elif PlayerStats.weapons[equipped_weapon]["mag"] <= 0:
+		PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"] -= 1
+		label.text = str(PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"])+"    "+str(PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"])+" | "+str(PlayerStats.weapons[PlayerStats.equipped_weapon]["mag_size"])
+	elif PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"] <= 0:
 		handle_reload()
 
 func handle_shooting():
-	if Input.is_action_just_pressed("shoot") and shot_timer.is_stopped() and anim_player.current_animation != equipped_weapon+"_reload":
+	if Input.is_action_just_pressed("shoot") and shot_timer.is_stopped() and anim_player.current_animation != PlayerStats.equipped_weapon+"_reload":
 		instantiate_bullet()
 		shot_timer.start()
 
 func _on_shot_cooldown_timeout():
-	if Input.is_action_pressed("shoot") and anim_player.current_animation != equipped_weapon+"_reload":
+	if Input.is_action_pressed("shoot") and anim_player.current_animation != PlayerStats.equipped_weapon+"_reload":
 		instantiate_bullet()
 		shot_timer.start()
 
 func _on_hotbar_gun_swapped():
-	label.text = str(PlayerStats.weapons[equipped_weapon]["bullets"])+"    "+str(PlayerStats.weapons[equipped_weapon]["mag"])+" | "+str(PlayerStats.weapons[equipped_weapon]["mag_size"])
-	shot_timer.wait_time = PlayerStats.weapons[equipped_weapon]["cooldown"]
+	label.text = str(PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"])+"    "+str(PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"])+" | "+str(PlayerStats.weapons[PlayerStats.equipped_weapon]["mag_size"])
+	shot_timer.wait_time = PlayerStats.weapons[PlayerStats.equipped_weapon]["cooldown"]
 
 func handle_health():
 	pass
