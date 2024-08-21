@@ -70,3 +70,7 @@ func _on_detection_area_2_body_exited(body: Node2D) -> void:
 	player = body
 	player_chase = true
 	speed = 110
+
+func _on_detection_area_body_exited(body: Node2D) -> void:
+	player_chase = false
+	player = null

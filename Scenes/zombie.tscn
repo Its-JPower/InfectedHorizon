@@ -441,6 +441,7 @@ libraries = {
 autoplay = "idle"
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
 [connection signal="body_entered" from="DetectionArea2" to="." method="_on_detection_area_2_body_entered"]
 [connection signal="body_exited" from="DetectionArea2" to="." method="_on_detection_area_2_body_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

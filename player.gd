@@ -166,5 +166,7 @@ func _on_hotbar_gun_swapped():
 	label.text = str(PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"])+"    "+str(PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"])+" | "+str(PlayerStats.weapons[PlayerStats.equipped_weapon]["mag_size"])
 	shot_timer.wait_time = PlayerStats.weapons[PlayerStats.equipped_weapon]["cooldown"]
 
-func handle_health():
+func handle_health(delta):
+	#if PlayerStats.health < PlayerStats.max_health and PlayerStats.health > 0:
+		#PlayerStats.health += PlayerStats
 	pass
