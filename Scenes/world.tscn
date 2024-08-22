@@ -179,6 +179,7 @@ position = Vector2(45.5, 4.75)
 position = Vector2(45, 13.75)
 
 [node name="SpawnTimer" type="Timer" parent="Player/Camera2D/EnemySpawner"]
+wait_time = 2.0
 autostart = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]

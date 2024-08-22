@@ -9,6 +9,11 @@ var player: Node2D = null
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 @onready var progress_bar: ProgressBar = $ProgressBar
 
+func _ready():
+	progress_bar.value = health
+
+func _process(delta: float) -> void:
+	progress_bar.rotation = 0
 
 func _physics_process(delta: float) -> void:
 	if player_chase and player != null:
@@ -52,27 +57,31 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		anim_player.play("idle")
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
-	player = body
-	player_chase = true
-
-func _on_detection_area_2_body_entered(body: Node2D) -> void:
-	if body == player:
-		speed = 100
-		player_chase = false
-		velocity = Vector2.ZERO
-		handle_attack(0)
-	else:
+	if body.is_in_group("Player"):
 		player = body
 		player_chase = true
 
+func _on_detection_area_2_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		if body == player:
+			speed = 100
+			player_chase = false
+			velocity = Vector2.ZERO
+			handle_attack(0)
+		else:
+			player = body
+			player_chase = true
+
 func _on_detection_area_2_body_exited(body: Node2D) -> void:
-	player = body
-	player_chase = true
-	speed = 110
+	if body.is_in_group("Player"):
+		player = body
+		player_chase = true
+		speed = 110
 
 func _on_detection_area_body_exited(body: Node2D) -> void:
-	player_chase = false
-	player = null
+	if body.is_in_group("Player"):
+		player_chase = false
+		player = null
 
 func update_health(value,max_value):
 	progress_bar.max_value = max_value
