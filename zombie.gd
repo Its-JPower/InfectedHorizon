@@ -8,6 +8,8 @@ var player: Node2D = null
 @export var max_health: float = 100.0
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 @onready var progress_bar: ProgressBar = $ProgressBar
+@onready var world: Node2D = $".."
+
 
 func _ready():
 	progress_bar.value = health
@@ -88,4 +90,8 @@ func update_health(value,max_value):
 	progress_bar.value = value
 
 func enemy_die():
+	PlayerStats.zombies -= 1
 	queue_free()
+	if PlayerStats.zombies <= 0:
+		PlayerStats.wave_progress += 1
+		world.spawn_wave(PlayerStats.wave_amount[PlayerStats.wave_progress])

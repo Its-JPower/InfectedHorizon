@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://player.gd" id="1_iskqk"]
 [ext_resource type="Texture2D" uid="uid://crvhq76isgb8c" path="res://Assets/Player/player_rifle.png" id="2_ai7lf"]
 [ext_resource type="Texture2D" uid="uid://cr538aisl1hfl" path="res://Assets/Player/player_handgun.png" id="2_vry05"]
-[ext_resource type="Texture2D" uid="uid://cdtoqtsf0u3g" path="res://Assets/Progress Bars/health_under.png" id="4_xy1g5"]
+[ext_resource type="Texture2D" uid="uid://brcs8pl1iixfk" path="res://Assets/Progress Bars/health_under.png" id="4_xy1g5"]
 [ext_resource type="Texture2D" uid="uid://dh18jady5obyp" path="res://Assets/Progress Bars/health_progress.png" id="5_pbwsd"]
 [ext_resource type="Texture2D" uid="uid://be1m5g81qs4j2" path="res://Assets/Progress Bars/stamina_under.png" id="6_22bnf"]
 [ext_resource type="Script" path="res://Scenes/Continue.gd" id="7_5ota3"]
