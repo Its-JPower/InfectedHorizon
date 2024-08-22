@@ -5,7 +5,9 @@ extends CharacterBody2D
 var player_chase = false
 var player: Node2D = null
 @export var health: float = 100.0
+@export var max_health: float = 100.0
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
+@onready var progress_bar: ProgressBar = $ProgressBar
 
 
 func _physics_process(delta: float) -> void:
@@ -59,9 +61,6 @@ func _on_detection_area_2_body_entered(body: Node2D) -> void:
 		player_chase = false
 		velocity = Vector2.ZERO
 		handle_attack(0)
-	elif body.is_in_group("ZombieHurt"):
-		health -= PlayerStats.weapons[PlayerStats.equipped_weapon]["damage"]
-		print(health)
 	else:
 		player = body
 		player_chase = true
@@ -74,3 +73,10 @@ func _on_detection_area_2_body_exited(body: Node2D) -> void:
 func _on_detection_area_body_exited(body: Node2D) -> void:
 	player_chase = false
 	player = null
+
+func update_health(value,max_value):
+	progress_bar.max_value = max_value
+	progress_bar.value = value
+
+func enemy_die():
+	queue_free()

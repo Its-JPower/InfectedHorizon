@@ -8,7 +8,7 @@
 radius = 6.5
 height = 36.0
 
-[node name="Bullet" type="Area2D"]
+[node name="Bullet" type="Area2D" groups=["ZombieHurt"]]
 scale = Vector2(0.175, 0.175)
 collision_layer = 2
 collision_mask = 2
@@ -16,12 +16,12 @@ script = ExtResource("1_mkyku")
 SPEED = 350
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(175, 0)
+position = Vector2(125, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_8atw7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(175, 0)
+position = Vector2(125, 0)
 rotation = 3.14159
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("2_a13x8")
@@ -31,4 +31,5 @@ stream = ExtResource("3_fugd8")
 autoplay = true
 bus = &"Sfx"
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]

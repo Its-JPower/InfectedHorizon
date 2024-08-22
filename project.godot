@@ -30,6 +30,11 @@ window/stretch/mode="viewport"
 
 enabled=PackedStringArray("res://addons/AS2P/plugin.cfg")
 
+[global_group]
+
+ZombieHurt=""
+Enemy=""
+
 [input]
 
 up={
