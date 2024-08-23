@@ -16,7 +16,6 @@ func _on_child_entered_tree(node):
 
 
 func _on_body_entered(body: Node2D) -> void:
-	print(self)
 	if body.is_in_group("Enemy") and body.has_method("enemy_die"):
 		sprite.visible = false
 		coll.visible = false

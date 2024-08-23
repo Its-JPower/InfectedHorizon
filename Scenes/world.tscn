@@ -211,9 +211,7 @@ bus = &"Ambience"
 
 [node name="Zombie" parent="." instance=ExtResource("4_t7lyv")]
 position = Vector2(621, 9)
-speed = 110
-health = 100.0
-max_health = 100.0
 
 [connection signal="Shot" from="Player" to="Player/Camera2D" method="_on_player_shot"]
 [connection signal="timeout" from="Player/Camera2D/EnemySpawner/SpawnTimer" to="Player/Camera2D/EnemySpawner" method="_on_spawn_timer_timeout"]
+[connection signal="spawnWaveSignal" from="Zombie" to="." method="_on_zombie_spawn_wave_signal"]

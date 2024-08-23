@@ -1,7 +1,9 @@
 extends CharacterBody2D
 
 
-@export var speed = 110
+signal spawnWaveSignal
+
+var speed = 100
 var player_chase = false
 var player: Node2D = null
 @export var health: float = 100.0
@@ -9,6 +11,7 @@ var player: Node2D = null
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 @onready var progress_bar: ProgressBar = $ProgressBar
 @onready var world: Node2D = $".."
+@onready var enemy_spawner: Node2D = $"../Player/Camera2D/EnemySpawner"
 
 
 func _ready():
@@ -50,7 +53,7 @@ func handle_attack(attack_origin : int):
 		else:
 			PlayerStats.health -= PlayerStats.damage[attack_origin]
 			PlayerStats.UpdateHealth.emit()
-			print(PlayerStats.health)
+			#print(PlayerStats.health)
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "attack" and velocity != Vector2.ZERO:
@@ -91,7 +94,6 @@ func update_health(value,max_value):
 
 func enemy_die():
 	PlayerStats.zombies -= 1
+	print(PlayerStats.zombies)
+	spawnWaveSignal.emit()
 	queue_free()
-	if PlayerStats.zombies <= 0:
-		PlayerStats.wave_progress += 1
-		world.spawn_wave(PlayerStats.wave_amount[PlayerStats.wave_progress])

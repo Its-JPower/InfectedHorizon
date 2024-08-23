@@ -3,6 +3,7 @@ extends Node
 
 signal UpdateHealth
 
+var zombies = 0
 var wave_progress = 1
 var health: float = 100.0
 var max_health: float = 100.0
@@ -34,7 +35,7 @@ var wave_amount = {
 	7: 20,
 	8: 20,
 	9: 25,
-	10: 10,
+	10: 10
 }
 
 func die(cause : int):

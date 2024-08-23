@@ -123,7 +123,7 @@ func handle_reload():
 			else:
 				PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"] -= (PlayerStats.weapons[PlayerStats.equipped_weapon]["mag_size"] - PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"])
 				PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"] += (PlayerStats.weapons[PlayerStats.equipped_weapon]["mag_size"] - PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"])
-				print(PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"])
+				#print(PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"])
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == PlayerStats.equipped_weapon+"_reload" or anim_name == PlayerStats.equipped_weapon+"_shoot":
@@ -141,7 +141,7 @@ func instantiate_bullet():
 		match PlayerStats.equipped_weapon:
 			"handgun": bullet = handgun_bullet.instantiate()
 			"rifle": bullet = rifle_bullet.instantiate()
-		print(str(PlayerStats.equipped_weapon+"_bullet"))
+		#print(str(PlayerStats.equipped_weapon+"_bullet"))
 		Shot.emit()
 		bullet.global_position = global_position
 		bullet.rotate(player.rotation)

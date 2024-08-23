@@ -13,7 +13,6 @@ var buttons = {"slot_1" : "_on_handgun_pressed", "slot_2" : "_on_rifle_pressed"}
 func _on_rifle_pressed(delta):
 	if not rifle.disabled and anim_player.current_animation != PlayerStats.equipped_weapon+"_reload":
 		PlayerStats.equipped_weapon = "rifle"
-		print(PlayerStats.equipped_weapon)
 		GunSwapped.emit()
 		handgun.flat = true
 		rifle.flat = false
@@ -22,7 +21,6 @@ func _on_rifle_pressed(delta):
 func _on_handgun_pressed(delta):
 	if anim_player.current_animation != PlayerStats.equipped_weapon+"_reload":
 		PlayerStats.equipped_weapon = "handgun"
-		print(PlayerStats.equipped_weapon)
 		GunSwapped.emit()
 		handgun.flat = false
 		rifle.flat = true
