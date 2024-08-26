@@ -35,6 +35,7 @@ enabled=PackedStringArray("res://addons/AS2P/plugin.cfg")
 ZombieHurt=""
 Enemy=""
 Player=""
+Pickup=""
 
 [input]
 

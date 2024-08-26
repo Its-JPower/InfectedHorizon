@@ -170,3 +170,12 @@ func handle_health(delta):
 	#if PlayerStats.health < PlayerStats.max_health and PlayerStats.health > 0:
 		#PlayerStats.health += PlayerStats
 	pass
+
+
+func _on_pickup_zone_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Pickup"):
+		if area.has_method("collect"):
+			area.collect()
+			
+			
+			

@@ -12,10 +12,12 @@ var player: Node2D = null
 @onready var progress_bar: ProgressBar = $ProgressBar
 @onready var world: Node2D = $".."
 @onready var enemy_spawner: Node2D = $"../Player/Camera2D/EnemySpawner"
-
+const AMMO = preload("res://Scenes/ammo.tscn")
+var probability : int = 75
 
 func _ready():
 	progress_bar.value = health
+	randomize()
 
 func _process(delta: float) -> void:
 	progress_bar.rotation = 0
@@ -97,3 +99,6 @@ func enemy_die():
 	print(PlayerStats.zombies)
 	spawnWaveSignal.emit()
 	queue_free()
+	var new_ammo = AMMO.instantiate()
+	new_ammo.global_position = global_position
+	add_sibling(new_ammo)
