@@ -31,6 +31,7 @@ const handgun_bullet = preload("res://Scenes/handgun_bullet.tscn")
 const rifle_bullet = preload("res://Scenes/rifle_bullet.tscn")
 var rotation_speed = 7.5
 var target_rotation = 0.0
+@onready var dieMenu = null
 
 func _ready():
 	stamina_bar.value = PlayerStats.stamina
@@ -176,6 +177,7 @@ func _on_pickup_zone_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Pickup"):
 		if area.has_method("collect"):
 			area.collect()
-			
-			
-			
+
+
+func die():
+	dieMenu.visible = true

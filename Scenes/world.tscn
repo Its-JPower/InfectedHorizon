@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://mo50xpvqqlmo"]
+[gd_scene load_steps=8 format=3 uid="uid://mo50xpvqqlmo"]
 
 [ext_resource type="Script" path="res://Scenes/world.gd" id="1_jcchn"]
 [ext_resource type="PackedScene" uid="uid://c62d041f84rpk" path="res://Scenes/player.tscn" id="1_oxrfq"]
 [ext_resource type="Texture2D" uid="uid://ccsy542tvwoun" path="res://Assets/Backgorund/GRASS+.png" id="2_kxtfk"]
 [ext_resource type="Script" path="res://Scenes/enemy_spawner.gd" id="2_s8eba"]
 [ext_resource type="AudioStream" uid="uid://dqnoevl72c4eb" path="res://Assets/Audio/ambience.mp3" id="4_olto2"]
-[ext_resource type="PackedScene" uid="uid://dx68f7vkrennh" path="res://Scenes/zombie.tscn" id="4_t7lyv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h1kj2"]
 texture = ExtResource("2_kxtfk")
@@ -209,9 +208,5 @@ stream = ExtResource("4_olto2")
 autoplay = true
 bus = &"Ambience"
 
-[node name="Zombie" parent="." instance=ExtResource("4_t7lyv")]
-position = Vector2(621, 9)
-
 [connection signal="Shot" from="Player" to="Player/Camera2D" method="_on_player_shot"]
 [connection signal="timeout" from="Player/Camera2D/EnemySpawner/SpawnTimer" to="Player/Camera2D/EnemySpawner" method="_on_spawn_timer_timeout"]
-[connection signal="spawnWaveSignal" from="Zombie" to="." method="_on_zombie_spawn_wave_signal"]

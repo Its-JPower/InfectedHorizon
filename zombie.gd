@@ -96,9 +96,10 @@ func update_health(value,max_value):
 
 func enemy_die():
 	PlayerStats.zombies -= 1
-	print(PlayerStats.zombies)
-	spawnWaveSignal.emit()
 	queue_free()
 	var new_ammo = AMMO.instantiate()
 	new_ammo.global_position = global_position
 	add_sibling(new_ammo)
+	if PlayerStats.zombies <= 0:
+		PlayerStats.wave_progress += 1
+		world.spawnWave(PlayerStats.wave_amount[PlayerStats.wave_progress])
