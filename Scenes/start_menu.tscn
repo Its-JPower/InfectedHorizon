@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://t0yfvamxcy08" path="res://Assets/Backgorund/title.png" id="2_hvwrl"]
 [ext_resource type="Script" path="res://Scenes/options.gd" id="4_kuwfo"]
 [ext_resource type="AudioStream" uid="uid://ckym3sneqs6wq" path="res://Assets/Audio/main_menu.mp3" id="5_a1fep"]
-[ext_resource type="Script" path="res://Scenes/Quit.gd" id="5_bmp2t"]
+[ext_resource type="Script" path="res://Scenes/quit.gd" id="5_ih0nl"]
 [ext_resource type="Script" path="res://Scenes/mainmusic_slider.gd" id="6_2iwly"]
 [ext_resource type="Script" path="res://Scenes/exitoptions.gd" id="7_2lc8l"]
 [ext_resource type="Script" path="res://Scenes/Menu Music.gd" id="9_keit0"]
@@ -110,7 +110,7 @@ offset_bottom = 66.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Quit"
-script = ExtResource("5_bmp2t")
+script = ExtResource("5_ih0nl")
 
 [node name="Options" type="Control" parent="Camera2D/CanvasLayer"]
 visible = false

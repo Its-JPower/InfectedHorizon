@@ -31,7 +31,7 @@ const handgun_bullet = preload("res://Scenes/handgun_bullet.tscn")
 const rifle_bullet = preload("res://Scenes/rifle_bullet.tscn")
 var rotation_speed = 7.5
 var target_rotation = 0.0
-@onready var dieMenu = null
+@onready var die_menu: Control = $UI/Control/dieMenu
 
 func _ready():
 	stamina_bar.value = PlayerStats.stamina
@@ -58,6 +58,7 @@ func _physics_process(delta):
 	handle_movement(delta)
 	handle_rotation(delta)
 	handle_stamina(delta)
+	handle_health(delta)
 	move_and_slide()
 	
 
@@ -168,10 +169,8 @@ func _on_hotbar_gun_swapped():
 	shot_timer.wait_time = PlayerStats.weapons[PlayerStats.equipped_weapon]["cooldown"]
 
 func handle_health(delta):
-	#if PlayerStats.health < PlayerStats.max_health and PlayerStats.health > 0:
-		#PlayerStats.health += PlayerStats
-	pass
-
+	if PlayerStats.health <= 0:
+		die()
 
 func _on_pickup_zone_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Pickup"):
@@ -180,4 +179,6 @@ func _on_pickup_zone_area_entered(area: Area2D) -> void:
 
 
 func die():
-	dieMenu.visible = true
+	die_menu.visible = true
+	PlayerStats.health = PlayerStats.max_health
+	get_tree().paused = true

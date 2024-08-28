@@ -1,15 +1,17 @@
-[gd_scene load_steps=151 format=3 uid="uid://c62d041f84rpk"]
+[gd_scene load_steps=153 format=3 uid="uid://c62d041f84rpk"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_iskqk"]
 [ext_resource type="Texture2D" uid="uid://crvhq76isgb8c" path="res://Assets/Player/player_rifle.png" id="2_ai7lf"]
+[ext_resource type="Script" path="res://Scenes/quit_to_menu.gd" id="2_qxdqn"]
 [ext_resource type="Texture2D" uid="uid://cr538aisl1hfl" path="res://Assets/Player/player_handgun.png" id="2_vry05"]
+[ext_resource type="Script" path="res://Scenes/restart.gd" id="4_3cuq3"]
 [ext_resource type="Texture2D" uid="uid://brcs8pl1iixfk" path="res://Assets/Progress Bars/health_under.png" id="4_xy1g5"]
+[ext_resource type="Script" path="res://Scenes/quit.gd" id="5_la74j"]
 [ext_resource type="Texture2D" uid="uid://dh18jady5obyp" path="res://Assets/Progress Bars/health_progress.png" id="5_pbwsd"]
 [ext_resource type="Texture2D" uid="uid://be1m5g81qs4j2" path="res://Assets/Progress Bars/stamina_under.png" id="6_22bnf"]
 [ext_resource type="Script" path="res://Scenes/Continue.gd" id="7_5ota3"]
 [ext_resource type="Texture2D" uid="uid://cv3xfykb6ga6x" path="res://Assets/Progress Bars/stamina_progress.png" id="7_pfsqc"]
 [ext_resource type="Script" path="res://Scenes/options.gd" id="8_63ck8"]
-[ext_resource type="Script" path="res://Scenes/Quit.gd" id="8_vgfh2"]
 [ext_resource type="Script" path="res://Scenes/Hotbar.gd" id="9_78omu"]
 [ext_resource type="Texture2D" uid="uid://b52afnk0o5t0x" path="res://Assets/guns/Pistol.png" id="9_upvlj"]
 [ext_resource type="Texture2D" uid="uid://c4v077ucgwlej" path="res://Assets/guns/AR.png" id="10_wdeub"]
@@ -1153,91 +1155,16 @@ collision_mask = 3
 script = ExtResource("1_iskqk")
 stamina_depletion_rate = 25.0
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.08, 0.08)
-sprite_frames = SubResource("SpriteFrames_3btn3")
-animation = &"handgun_idle"
-autoplay = "handgun_idle"
-offset = Vector2(30.9375, -24.25)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -1.5)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_syva0")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_lt7ub")
-}
-autoplay = "handgun_idle"
-
 [node name="UI" type="CanvasLayer" parent="."]
-
-[node name="dieMenu" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="CenterContainer" type="CenterContainer" parent="UI/dieMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/dieMenu/CenterContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UI/dieMenu/CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = "You Died!"
-
-[node name="Label2" type="Label" parent="UI/dieMenu/CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = " "
-
-[node name="Label3" type="Label" parent="UI/dieMenu/CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = " "
-
-[node name="Label4" type="Label" parent="UI/dieMenu/CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = " "
-
-[node name="Label5" type="Label" parent="UI/dieMenu/CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = " "
-
-[node name="Label6" type="Label" parent="UI/dieMenu/CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = " "
-
-[node name="Label7" type="Label" parent="UI/dieMenu/CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = " "
-
-[node name="Label8" type="Label" parent="UI/dieMenu/CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = " "
-
-[node name="Button" type="Button" parent="UI/dieMenu/CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = "Rage Quit"
 
 [node name="Control" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -7.0
+offset_left = -2.0
 offset_top = 1.0
-offset_right = -7.0
+offset_right = -2.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -1346,7 +1273,7 @@ offset_bottom = 66.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Quit"
-script = ExtResource("8_vgfh2")
+script = ExtResource("5_la74j")
 
 [node name="Hotbar" type="GridContainer" parent="UI/Control"]
 layout_mode = 1
@@ -1499,6 +1426,91 @@ autowrap_mode = 0
 script = ExtResource("17_id25s")
 metadata/_edit_use_anchors_ = true
 
+[node name="dieMenu" type="Control" parent="UI/Control"]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 2.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="UI/Control/dieMenu"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.5
+offset_top = -91.5
+offset_right = 34.5
+offset_bottom = -68.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "You Died"
+vertical_alignment = 1
+
+[node name="Restart" type="Button" parent="UI/Control/dieMenu"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = 35.5
+offset_right = 125.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Restart"
+script = ExtResource("4_3cuq3")
+
+[node name="QuitToMenu" type="Button" parent="UI/Control/dieMenu"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = 75.5
+offset_right = 125.0
+offset_bottom = 106.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit to Menu"
+script = ExtResource("2_qxdqn")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.08, 0.08)
+sprite_frames = SubResource("SpriteFrames_3btn3")
+animation = &"handgun_idle"
+autoplay = "handgun_idle"
+offset = Vector2(30.9375, -24.25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -1.5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_syva0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lt7ub")
+}
+autoplay = "handgun_idle"
+
 [node name="ShotCooldown" type="Timer" parent="."]
 one_shot = true
 
@@ -1509,10 +1521,10 @@ position = Vector2(1, -1.5)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_h4ips")
 
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="GunSwapped" from="UI/Control/Hotbar" to="." method="_on_hotbar_gun_swapped"]
 [connection signal="pressed" from="UI/Control/Hotbar/handgun" to="UI/Control/Hotbar" method="_on_handgun_pressed"]
 [connection signal="pressed" from="UI/Control/Hotbar/rifle" to="UI/Control/Hotbar" method="_on_rifle_pressed"]
 [connection signal="item_selected" from="UI/Control/Options/VBoxContainer/Resolution" to="UI/Control/Options/VBoxContainer/Resolution" method="_on_item_selected"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="ShotCooldown" to="." method="_on_shot_cooldown_timeout"]
 [connection signal="area_entered" from="PickupZone" to="." method="_on_pickup_zone_area_entered"]
