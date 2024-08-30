@@ -46,3 +46,17 @@ func die(cause : int):
 			return causes[1]
 		2:
 			return causes[2]
+
+func reset():
+	zombies = 0
+	wave_progress = 1
+	health = 100.0
+	max_health = 100.0
+	defense = 0.0
+	sprint_speed = 150.0
+	stamina = 100.0
+	max_stamina  = 100.0
+	equipped_weapon = "handgun"
+	weapons = {
+	"rifle": {"mag": 30, "mag_size": 30, "bullets": 120, "cooldown": 0.1, "damage": 30.0},
+	"handgun": {"mag": 8, "mag_size": 8, "bullets": 64, "cooldown": 1.0, "damage": 50.0}}
