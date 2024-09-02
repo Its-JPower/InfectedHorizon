@@ -1,9 +1,10 @@
-[gd_scene load_steps=153 format=3 uid="uid://c62d041f84rpk"]
+[gd_scene load_steps=155 format=3 uid="uid://c62d041f84rpk"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_iskqk"]
 [ext_resource type="Texture2D" uid="uid://crvhq76isgb8c" path="res://Assets/Player/player_rifle.png" id="2_ai7lf"]
 [ext_resource type="Script" path="res://Scenes/quit_to_menu.gd" id="2_qxdqn"]
 [ext_resource type="Texture2D" uid="uid://cr538aisl1hfl" path="res://Assets/Player/player_handgun.png" id="2_vry05"]
+[ext_resource type="Script" path="res://Scenes/healh_overlay.gd" id="3_t6vkp"]
 [ext_resource type="Script" path="res://Scenes/restart.gd" id="4_3cuq3"]
 [ext_resource type="Texture2D" uid="uid://brcs8pl1iixfk" path="res://Assets/Progress Bars/health_under.png" id="4_xy1g5"]
 [ext_resource type="Script" path="res://Scenes/quit.gd" id="5_la74j"]
@@ -19,6 +20,7 @@
 [ext_resource type="Script" path="res://Scenes/exitoptions.gd" id="13_wfyj7"]
 [ext_resource type="Script" path="res://Scenes/Resolution.gd" id="14_pi6wr"]
 [ext_resource type="Script" path="res://Scenes/test.gd" id="17_id25s"]
+[ext_resource type="Texture2D" uid="uid://bu8s26emmt3u1" path="res://Assets/Pain Hud.png" id="18_kbh30"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kibkg"]
 atlas = ExtResource("2_vry05")
@@ -1168,6 +1170,21 @@ offset_right = -2.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="HealhOverlay" type="TextureRect" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_kbh30")
+expand_mode = 1
+script = ExtResource("3_t6vkp")
 
 [node name="Health" type="TextureProgressBar" parent="UI/Control"]
 layout_mode = 1
