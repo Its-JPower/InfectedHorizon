@@ -18,9 +18,9 @@
 [ext_resource type="Texture2D" uid="uid://c4v077ucgwlej" path="res://Assets/guns/AR.png" id="10_wdeub"]
 [ext_resource type="Script" path="res://Scenes/mainmusic_slider.gd" id="12_4i1po"]
 [ext_resource type="Script" path="res://Scenes/exitoptions.gd" id="13_wfyj7"]
-[ext_resource type="Script" path="res://Scenes/Resolution.gd" id="14_pi6wr"]
 [ext_resource type="Script" path="res://Scenes/test.gd" id="17_id25s"]
 [ext_resource type="Texture2D" uid="uid://bu8s26emmt3u1" path="res://Assets/Pain Hud.png" id="18_kbh30"]
+[ext_resource type="Texture2D" uid="uid://c8jah7hynmwia" path="res://Assets/light.png" id="21_xncpl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kibkg"]
 atlas = ExtResource("2_vry05")
@@ -1410,17 +1410,6 @@ bus_name = "Ambience"
 [node name="HSeparator" type="HSeparator" parent="UI/Control/Options/VBoxContainer"]
 layout_mode = 2
 
-[node name="Resolution" type="OptionButton" parent="UI/Control/Options/VBoxContainer"]
-layout_mode = 2
-selected = 2
-item_count = 3
-popup/item_0/text = "1920x1080"
-popup/item_1/text = "1600x900"
-popup/item_1/id = 2
-popup/item_2/text = "1280x720"
-popup/item_2/id = 1
-script = ExtResource("14_pi6wr")
-
 [node name="ExitOptions" type="Button" parent="UI/Control/Options"]
 layout_mode = 1
 offset_left = 5.0
@@ -1538,10 +1527,13 @@ position = Vector2(1, -1.5)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_h4ips")
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = ExtResource("21_xncpl")
+texture_scale = 0.25
+
 [connection signal="GunSwapped" from="UI/Control/Hotbar" to="." method="_on_hotbar_gun_swapped"]
 [connection signal="pressed" from="UI/Control/Hotbar/handgun" to="UI/Control/Hotbar" method="_on_handgun_pressed"]
 [connection signal="pressed" from="UI/Control/Hotbar/rifle" to="UI/Control/Hotbar" method="_on_rifle_pressed"]
-[connection signal="item_selected" from="UI/Control/Options/VBoxContainer/Resolution" to="UI/Control/Options/VBoxContainer/Resolution" method="_on_item_selected"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="ShotCooldown" to="." method="_on_shot_cooldown_timeout"]
 [connection signal="area_entered" from="PickupZone" to="." method="_on_pickup_zone_area_entered"]
