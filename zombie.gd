@@ -20,6 +20,8 @@ func _ready():
 
 func _process(delta: float) -> void:
 	progress_bar.rotation = 0
+	if isinrange:
+		handle_attack(0)
 
 func _physics_process(delta: float) -> void:
 	if player_chase and player != null:
@@ -45,16 +47,16 @@ func _physics_process(delta: float) -> void:
 func handle_attack(attack_origin : int):
 	if anim_player.current_animation != "attack":
 		anim_player.play("attack")
-		await anim_player.animation_finished
 		if PlayerStats.health - PlayerStats.damage[attack_origin] <= 0 and isinrange:
+			await anim_player.animation_finished
 			PlayerStats.health -= PlayerStats.damage[attack_origin]
 			PlayerStats.health = min(PlayerStats.health, 0)
 			PlayerStats.UpdateHealth.emit()
 			PlayerStats.die(attack_origin)
 		elif isinrange:
+			await anim_player.animation_finished
 			PlayerStats.health -= PlayerStats.damage[attack_origin]
 			PlayerStats.UpdateHealth.emit()
-			#print(PlayerStats.health)
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "attack" and velocity != Vector2.ZERO:

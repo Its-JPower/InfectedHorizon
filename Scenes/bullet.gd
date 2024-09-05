@@ -17,8 +17,8 @@ func _on_child_entered_tree(node):
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemy") and body.has_method("enemy_die"):
-		sprite.visible = false
-		coll.visible = false
+		#sprite.visible = false
+		#coll.visible = false
 		body.health -= PlayerStats.weapons[PlayerStats.equipped_weapon]["damage"]
 		body.update_health(body.health, body.max_health)
 		if body.health <= 0:
