@@ -29,6 +29,7 @@ var can_use_stamina = true
 @onready var hotbar_buttons = []
 const handgun_bullet = preload("res://Scenes/handgun_bullet.tscn")
 const rifle_bullet = preload("res://Scenes/rifle_bullet.tscn")
+const DAMAGE_INDICATOR = preload("res://Scenes/damage_indicator.tscn")
 var rotation_speed = 7.5
 var target_rotation = 0.0
 @onready var die_menu: Control = $UI/Control/dieMenu

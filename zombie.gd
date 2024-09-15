@@ -13,6 +13,7 @@ var player: Node2D = null
 const AMMO = preload("res://Scenes/ammo.tscn")
 var probability : int = 75
 var isinrange = false
+const DAMAGE_INDICATOR = preload("res://Scenes/damage_indicator.tscn")
 
 func _ready():
 	progress_bar.value = health
@@ -110,3 +111,15 @@ func enemy_die():
 	if PlayerStats.zombies <= 0:
 		PlayerStats.wave_progress += 1
 		world.spawnWave(PlayerStats.wave_amount[PlayerStats.wave_progress])
+
+func spawn_effect(EFFECT: PackedScene, effect_position: Vector2 = global_position):
+	if EFFECT:
+		var effect = EFFECT.instantiate()
+		get_tree().current_scene.add_child(effect)
+		effect.global_position = effect_position
+	
+
+func spawn_dmgIndicator():
+	var indicator = spawn_effect(DAMAGE_INDICATOR)
+	if indicator:
+		indicator.label.text = str(PlayerStats.weapons[PlayerStats.equipped_weapon]["damage"])
