@@ -105,6 +105,7 @@ func update_health(value,max_value):
 func enemy_die():
 	PlayerStats.currency += 100
 	PlayerStats.total_currency += 100
+	PlayerStats.score += 10
 	PlayerStats.zombies -= 1
 	queue_free()
 	var new_ammo = AMMO.instantiate()
