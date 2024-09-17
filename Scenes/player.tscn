@@ -1,4 +1,4 @@
-[gd_scene load_steps=155 format=3 uid="uid://c62d041f84rpk"]
+[gd_scene load_steps=156 format=3 uid="uid://c62d041f84rpk"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_iskqk"]
 [ext_resource type="Texture2D" uid="uid://crvhq76isgb8c" path="res://Assets/Player/player_rifle.png" id="2_ai7lf"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://Scenes/exitoptions.gd" id="13_wfyj7"]
 [ext_resource type="Script" path="res://Scenes/test.gd" id="17_id25s"]
 [ext_resource type="Texture2D" uid="uid://bu8s26emmt3u1" path="res://Assets/Pain Hud.png" id="18_kbh30"]
+[ext_resource type="Texture2D" uid="uid://b0i3l4237rsje" path="res://download (2).png" id="19_gmvty"]
 [ext_resource type="Texture2D" uid="uid://c8jah7hynmwia" path="res://Assets/light.png" id="21_xncpl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kibkg"]
@@ -1498,6 +1499,19 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Quit to Menu"
 script = ExtResource("2_qxdqn")
+
+[node name="UpgradeShop" type="TextureButton" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -45.0
+offset_top = -11.0
+offset_right = 509.0
+offset_bottom = 543.0
+grow_horizontal = 0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("19_gmvty")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.08, 0.08)
