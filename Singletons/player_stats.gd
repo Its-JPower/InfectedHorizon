@@ -3,6 +3,8 @@ extends Node
 signal UpdateHealth
 
 
+
+
 var currency = 0
 var total_currency = 0
 var score = 0
@@ -43,7 +45,12 @@ var wave_amount = {
 	12: 30,
 	13: 35,
 	14: 35,
-	15: 40
+	15: 40,
+	16: 45,
+	17: 50,
+	18: 55,
+	19: 60,
+	20: 75
 }
 
 func die(cause : int):
@@ -68,3 +75,6 @@ func reset():
 	weapons = {
 	"rifle": {"mag": 30, "mag_size": 30, "bullets": 120, "cooldown": 0.1, "damage": 30.0},
 	"handgun": {"mag": 8, "mag_size": 8, "bullets": 64, "cooldown": 1.0, "damage": 50.0}}
+
+func upgrade_max_health():
+	pass

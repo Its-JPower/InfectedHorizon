@@ -34,6 +34,7 @@ var rotation_speed = 7.5
 var target_rotation = 0.0
 @onready var die_menu: Control = $UI/Control/dieMenu
 var current_ammo = 0
+@onready var shop_button: TextureButton = $UI/Control/ShopButton
 
 
 func _ready():
@@ -42,6 +43,7 @@ func _ready():
 	for button in grid_container.get_children():
 		if button is Button:
 			hotbar_buttons.append(button)
+	hotbar_buttons.append(shop_button)
 
 func _input(event):
 	if event is InputEventMouseButton:

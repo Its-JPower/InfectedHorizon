@@ -17,7 +17,7 @@ const DAMAGE_INDICATOR = preload("res://Scenes/damage_indicator.tscn")
 
 func _ready():
 	progress_bar.value = health
-	randomize()
+	player = get_tree().get_first_node_in_group("Player")
 
 func _process(delta: float) -> void:
 	progress_bar.rotation = 0
@@ -25,39 +25,28 @@ func _process(delta: float) -> void:
 		handle_attack(0)
 
 func _physics_process(delta: float) -> void:
-	if player_chase and player != null:
-		# Calculate the direction to the player
-		var direction = (player.position - position).normalized()
-		
-		# Move the character towards the player
-		velocity = direction * speed
-		move_and_slide()
-
-		# Rotate the character to face the player
-		rotation = direction.angle()
-
-		# Play the "move" animation if not already playing
-		if anim_player.current_animation != "move" and anim_player.current_animation != "attack":
-			anim_player.play("move")
-	else:
-		# Stop the character if not chasing
-		velocity = Vector2.ZERO
-		if not anim_player.current_animation == "attack":
-			anim_player.play("idle")
+	var direction = (player.position - position).normalized() # Calculate the direction to the player
+	velocity = direction * speed # Moves the enemy towards the player
+	move_and_slide()
+	rotation = direction.angle() # Rotate the character to face the player
+	if anim_player.current_animation != "move" and anim_player.current_animation != "attack": # Play the "move" animation if not already playing
+		anim_player.play("move")
 
 func handle_attack(attack_origin : int):
 	if anim_player.current_animation != "attack":
 		anim_player.play("attack")
 		if PlayerStats.health - PlayerStats.damage[attack_origin] <= 0 and isinrange:
 			await anim_player.animation_finished
-			PlayerStats.health -= PlayerStats.damage[attack_origin]
-			PlayerStats.health = min(PlayerStats.health, 0)
-			PlayerStats.UpdateHealth.emit()
-			PlayerStats.die(attack_origin)
+			if isinrange:
+				PlayerStats.health -= PlayerStats.damage[attack_origin]
+				PlayerStats.health = min(PlayerStats.health, 0)
+				PlayerStats.UpdateHealth.emit()
+				PlayerStats.die(attack_origin)
 		elif isinrange:
 			await anim_player.animation_finished
-			PlayerStats.health -= PlayerStats.damage[attack_origin]
-			PlayerStats.UpdateHealth.emit()
+			if isinrange:
+				PlayerStats.health -= PlayerStats.damage[attack_origin]
+				PlayerStats.UpdateHealth.emit()
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "attack" and velocity != Vector2.ZERO:
@@ -72,31 +61,13 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 
 func _on_detection_area_2_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		if body == player:
-			speed = 100
-			player_chase = false
-			velocity = Vector2.ZERO
-			isinrange = true
-			handle_attack(0)
-		else:
-			player = body
-			player_chase = true
+		velocity = Vector2.ZERO
+		isinrange = true
+		handle_attack(0)
 
 func _on_detection_area_2_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		player = body
-		player_chase = true
 		isinrange = false
-		speed = 105
-		await get_tree().create_timer(0.25).timeout
-		speed = 100
-
-func _on_detection_area_body_exited(body: Node2D) -> void:
-	if body.is_in_group("Player"):
-		player_chase = false
-		player = null
-		isinrange = false
-		anim_player.play("walk")
 
 func update_health(value,max_value):
 	progress_bar.max_value = max_value
