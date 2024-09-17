@@ -103,6 +103,8 @@ func update_health(value,max_value):
 	progress_bar.value = value
 
 func enemy_die():
+	PlayerStats.currency += 100
+	PlayerStats.total_currency += 100
 	PlayerStats.zombies -= 1
 	queue_free()
 	var new_ammo = AMMO.instantiate()
@@ -117,9 +119,9 @@ func spawn_effect(EFFECT: PackedScene, effect_position: Vector2 = global_positio
 		var effect = EFFECT.instantiate()
 		get_tree().current_scene.add_child(effect)
 		effect.global_position = effect_position
+		effect.label.text = str(PlayerStats.weapons[PlayerStats.equipped_weapon]["damage"])
 	
 
-func spawn_dmgIndicator():
+func spawn_dmgIndicator(damage):
 	var indicator = spawn_effect(DAMAGE_INDICATOR)
-	if indicator:
-		indicator.label.text = str(PlayerStats.weapons[PlayerStats.equipped_weapon]["damage"])
+	#indicator.label.text = str(damage)

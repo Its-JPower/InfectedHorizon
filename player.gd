@@ -194,4 +194,6 @@ func _on_pickup_zone_area_entered(area: Area2D) -> void:
 func die():
 	die_menu.visible = true
 	PlayerStats.health = PlayerStats.max_health
+	PlayerStats.currency = 0
+	PlayerStats.total_currency = 0
 	get_tree().paused = true

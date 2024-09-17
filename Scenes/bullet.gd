@@ -21,6 +21,8 @@ func _on_body_entered(body: Node2D) -> void:
 		#coll.visible = false
 		body.health -= PlayerStats.weapons[PlayerStats.equipped_weapon]["damage"]
 		body.update_health(body.health, body.max_health)
-		body.spawn_dmgIndicator()
+		body.spawn_dmgIndicator(PlayerStats.weapons[PlayerStats.equipped_weapon]["damage"])
+		PlayerStats.currency += 10
+		PlayerStats.total_currency += 10
 		if body.health <= 0:
 			body.enemy_die()
