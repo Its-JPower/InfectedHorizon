@@ -9,7 +9,7 @@ func _process(delta: float) -> void:
 		if time_passed >= 1.0:
 			time_passed = 0.0
 			timer += 1
-			update_stats()
+	update_stats()
 
 func update_stats() -> void:
 	# Assuming PlayerStats is a singleton or autoload
