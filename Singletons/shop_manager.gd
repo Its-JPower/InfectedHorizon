@@ -11,6 +11,11 @@ var shop_prices = {
 	"walk_speed": {1:5000,2:10000,3:25000,"max":3,"current":0, "method":"upgrade_walk_speed"}
 	}
 
+var full_price: int = 1000
+var full_amount: int = 1
+var half_price: int = 650
+var half_amount: int = 1
+
 func bought_item(item):
 	var current_level = shop_prices[item]["current"]
 	var max_level = shop_prices[item]["max"]
@@ -27,4 +32,20 @@ func bought_item(item):
 
 func call_method(method_name):
 	if PlayerStats.has_method(method_name):
-		PlayerStats.call(method_name,get_process_delta_time())
+		PlayerStats.call(method_name)
+
+func buy_heal(heal):
+	if heal == "half":
+		var next_upgrade_cost = half_price * half_amount
+		if PlayerStats.currency >= next_upgrade_cost:
+			PlayerStats.currency -= next_upgrade_cost
+			half_amount += 1
+			call_method("half_heal")
+			return "success"
+	elif heal == "full":
+		var next_upgrade_cost = full_price * full_amount
+		if PlayerStats.currency >= next_upgrade_cost:
+			PlayerStats.currency -= next_upgrade_cost
+			full_amount += 1
+			call_method("full_heal")
+			return "success"

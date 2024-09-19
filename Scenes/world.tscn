@@ -88,6 +88,7 @@ terrain_set_0/terrain_0/color = Color(0.501961, 1, 0.839216, 1)
 sources/0 = SubResource("TileSetAtlasSource_h1kj2")
 
 [node name="World" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_jcchn")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]

@@ -5,11 +5,13 @@ var paused = false
 
 func _pressed():
 	paused = false
+	PlayerStats.is_paused = !PlayerStats.is_paused
 	get_tree().paused = !get_tree().paused
 	control.visible = !control.visible
 
 func _input(event):
 	if Input.is_action_just_pressed("pause") and paused == false:
 		paused = true
+		PlayerStats.is_paused = !PlayerStats.is_paused
 		get_tree().paused = !get_tree().paused
 		control.visible = !control.visible

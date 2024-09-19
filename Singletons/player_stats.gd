@@ -3,8 +3,11 @@ extends Node
 signal UpdateHealth
 
 
-
-
+var is_paused : bool = false
+var time_minutes: int = 0
+var time_seconds: int = 0
+var total_damage: int = 0
+var total_kills: int = 0
 var currency = 0
 var total_currency = 0
 var score = 0
@@ -17,6 +20,7 @@ var sprint_speed: float = 150.0
 var stamina: float = 100.0
 var max_stamina : float = 100.0
 var equipped_weapon : String = "handgun"
+var walk_speed : float = 100.0
 var weapons = {
 	"rifle": {"mag": 30, "mag_size": 30, "bullets": 120, "cooldown": 0.1, "damage": 30.0},
 	"handgun": {"mag": 8, "mag_size": 8, "bullets": 64, "cooldown": 1.0, "damage": 50.0}}
@@ -75,6 +79,12 @@ func reset():
 	weapons = {
 	"rifle": {"mag": 30, "mag_size": 30, "bullets": 120, "cooldown": 0.1, "damage": 30.0},
 	"handgun": {"mag": 8, "mag_size": 8, "bullets": 64, "cooldown": 1.0, "damage": 50.0}}
+	currency = 0
+	total_currency = 0
+	time_minutes = 0
+	time_seconds = 0
+	total_damage = 0
+	total_kills = 0
 
 func upgrade_max_health():
 	max_health += 40
@@ -93,3 +103,17 @@ func upgrade_rifle_mag():
 
 func upgrade_pistol_mag():
 	weapons["pistol"]["mag_size"] += 14
+
+func upgrade_walk_speed():
+	walk_speed += 10.0
+
+func half_heal():
+	health += max_health/2
+	health = min(health, max_health)
+
+func full_heal():
+	health = max_health
+
+func wait_until_unpaused() -> void:
+	while get_tree().paused:
+		await get_tree().create_timer(0.1).timeout

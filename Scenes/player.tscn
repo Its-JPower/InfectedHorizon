@@ -1,4 +1,4 @@
-[gd_scene load_steps=164 format=3 uid="uid://c62d041f84rpk"]
+[gd_scene load_steps=165 format=3 uid="uid://c62d041f84rpk"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_iskqk"]
 [ext_resource type="Texture2D" uid="uid://crvhq76isgb8c" path="res://Assets/Player/player_rifle.png" id="2_ai7lf"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://c4v077ucgwlej" path="res://Assets/guns/AR.png" id="10_wdeub"]
 [ext_resource type="Script" path="res://Scenes/mainmusic_slider.gd" id="12_4i1po"]
 [ext_resource type="Script" path="res://Scenes/exitoptions.gd" id="13_wfyj7"]
+[ext_resource type="FontFile" uid="uid://dvbq81defttnj" path="res://Assets/VintageBrush.ttf" id="16_an78j"]
 [ext_resource type="Script" path="res://Scenes/test.gd" id="17_id25s"]
 [ext_resource type="Texture2D" uid="uid://bu8s26emmt3u1" path="res://Assets/Pain Hud.png" id="18_kbh30"]
 [ext_resource type="Texture2D" uid="uid://cwlal8gh0f0v5" path="res://Assets/shop_icon.png" id="19_7dd8a"]
@@ -921,9 +922,8 @@ animations = [{
 "speed": 20.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_syva0"]
-radius = 3.0
-height = 8.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_hi050"]
+radius = 3.64005
 
 [sub_resource type="Animation" id="Animation_d4kvs"]
 length = 1.33333
@@ -1156,13 +1156,13 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h4ips"]
-radius = 16.5
-height = 33.0
+radius = 26.0
+height = 52.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 1
 collision_layer = 3
-collision_mask = 3
+collision_mask = 0
 script = ExtResource("1_iskqk")
 stamina_depletion_rate = 25.0
 
@@ -1431,16 +1431,19 @@ script = ExtResource("13_wfyj7")
 
 [node name="HUD" type="RichTextLabel" parent="UI/Control"]
 process_mode = 3
-layout_mode = 0
-offset_left = 9.0
-offset_top = 2.0
-offset_right = 49.0
-offset_bottom = 42.0
+layout_mode = 1
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 57.0
+offset_bottom = 68.0
+theme_override_fonts/normal_font = ExtResource("16_an78j")
+text = "00:00
+$0
+Wave 1"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 script = ExtResource("17_id25s")
-metadata/_edit_use_anchors_ = true
 
 [node name="dieMenu" type="Control" parent="UI/Control"]
 process_mode = 3
@@ -1609,7 +1612,7 @@ offset = Vector2(30.9375, -24.25)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -1.5)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_syva0")
+shape = SubResource("CircleShape2D_hi050")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

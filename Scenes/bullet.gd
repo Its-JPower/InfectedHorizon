@@ -24,5 +24,6 @@ func _on_body_entered(body: Node2D) -> void:
 		body.spawn_dmgIndicator(PlayerStats.weapons[PlayerStats.equipped_weapon]["damage"])
 		PlayerStats.currency += 10
 		PlayerStats.total_currency += 10
+		PlayerStats.total_damage += PlayerStats.weapons[PlayerStats.equipped_weapon]["damage"]
 		if body.health <= 0:
 			body.enemy_die()

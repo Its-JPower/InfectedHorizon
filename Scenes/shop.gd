@@ -79,3 +79,11 @@ func _on_btn_walk_speed_pressed() -> void:
 		else:
 			var next_price = ShopManager.shop_prices["walk_speed"][current_level + 1]
 			btn_walk_speed.text = "Upgrade Walk Speed $" + str(next_price)
+
+func _on_btn_half_heal_pressed() -> void:
+	if ShopManager.buy_heal("half") == "success":
+		btn_half_heal.text = "Purchase Half Heal $"+str(ShopManager.half_price*ShopManager.half_amount)
+
+func _on_btn_full_heal_pressed() -> void:
+	if ShopManager.buy_heal("full") == "success":
+		btn_half_heal.text = "Purchase Full Heal $"+str(ShopManager.full_price*ShopManager.full_amount)

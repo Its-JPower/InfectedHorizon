@@ -11,6 +11,7 @@ func spawnWave(count : int):
 		await get_tree().create_timer(4.0).timeout
 	while count > 0:
 		await get_tree().create_timer(1.0).timeout
+		await PlayerStats.wait_until_unpaused()
 		count -= 1
 		enemy_spawner.spawn_enemy()
 		PlayerStats.zombies += 1

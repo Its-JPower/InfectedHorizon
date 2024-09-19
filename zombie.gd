@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	var direction = (player.position - position).normalized() # Calculate the direction to the player
 	velocity = direction * speed # Moves the enemy towards the player
-	move_and_slide()
+	move_and_collide(velocity * delta)
 	rotation = direction.angle() # Rotate the character to face the player
 	if anim_player.current_animation != "move" and anim_player.current_animation != "attack": # Play the "move" animation if not already playing
 		anim_player.play("move")
@@ -74,6 +74,7 @@ func update_health(value,max_value):
 	progress_bar.value = value
 
 func enemy_die():
+	PlayerStats.total_kills += 1
 	PlayerStats.currency += 100
 	PlayerStats.total_currency += 100
 	PlayerStats.score += 10
@@ -84,6 +85,7 @@ func enemy_die():
 	add_sibling(new_ammo)
 	if PlayerStats.zombies <= 0:
 		PlayerStats.wave_progress += 1
+		PlayerStats.currency += (250*PlayerStats.wave_progress/4)
 		world.spawnWave(PlayerStats.wave_amount[PlayerStats.wave_progress])
 
 func spawn_effect(EFFECT: PackedScene, effect_position: Vector2 = global_position):

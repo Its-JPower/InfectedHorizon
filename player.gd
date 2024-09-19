@@ -4,8 +4,6 @@ extends CharacterBody2D
 signal Shot
 
 @onready var health_bar: TextureProgressBar = $UI/Control/Health
-@export var speed : float = 100.0 # variable for normal speed
-@export var sprint : float = 150.0 # variable for speed when sprinting
 @export var acceleration : float = 40.0 # variable for acceleration
 @export var friction = 50.0 # variable for friction
 @export var scoped_speed_reduction : float = 15.0 # variable for scoped speed reduction
@@ -68,17 +66,19 @@ func _physics_process(delta):
 	handle_rotation(delta)
 	handle_stamina(delta)
 	handle_health(delta)
-	move_and_slide()
+	move_and_collide(velocity * delta)
 	
 
 func handle_movement(delta):
 	direction = Input.get_vector("left", "right", "up", "down").normalized()
 	if direction:
+		var speed = PlayerStats.walk_speed # variable for normal speed
 		var target_speed = speed
 		if Input.is_action_pressed("scoped") and scoped == false:
 			scoped = true
 			target_speed -= scoped_speed_reduction
 		elif Input.is_action_pressed("sprint") and PlayerStats.stamina > 0 and can_use_stamina == true:
+			var sprint : float = PlayerStats.walk_speed + 50.0 # variable for speed when sprinting
 			target_speed = sprint
 			PlayerStats.stamina -= stamina_depletion_rate * delta  # Adjust stamina decrease rate
 			PlayerStats.stamina = max(PlayerStats.stamina, 0)  # Ensure stamina does not go below 0
@@ -194,8 +194,4 @@ func _on_pickup_zone_area_entered(area: Area2D) -> void:
 
 
 func die():
-	die_menu.visible = true
-	PlayerStats.health = PlayerStats.max_health
-	PlayerStats.currency = 0
-	PlayerStats.total_currency = 0
-	get_tree().paused = true
+	get_tree().change_scene_to_file("res://Scenes/death_screen.tscn")
