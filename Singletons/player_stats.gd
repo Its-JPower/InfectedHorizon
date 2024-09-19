@@ -77,4 +77,19 @@ func reset():
 	"handgun": {"mag": 8, "mag_size": 8, "bullets": 64, "cooldown": 1.0, "damage": 50.0}}
 
 func upgrade_max_health():
-	pass
+	max_health += 40
+	
+func upgrade_max_stamina():
+	max_stamina += 40
+	
+func upgrade_rifle_damage():
+	weapons["rifle"]["damage"] += 14
+	
+func upgrade_pistol_damage():
+	weapons["pistol"]["damage"] += 10
+	
+func upgrade_rifle_mag():
+	weapons["rifle"]["mag_size"] += 14
+
+func upgrade_pistol_mag():
+	weapons["pistol"]["mag_size"] += 14
