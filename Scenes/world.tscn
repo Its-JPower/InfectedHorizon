@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://mo50xpvqqlmo"]
 
-[ext_resource type="Script" path="res://Scenes/world.gd" id="1_jcchn"]
+[ext_resource type="Script" path="res://Scripts/world.gd" id="1_jcchn"]
 [ext_resource type="PackedScene" uid="uid://c62d041f84rpk" path="res://Scenes/player.tscn" id="1_oxrfq"]
 [ext_resource type="Texture2D" uid="uid://ccsy542tvwoun" path="res://Assets/Backgorund/GRASS+.png" id="2_kxtfk"]
-[ext_resource type="Script" path="res://Scenes/enemy_spawner.gd" id="2_s8eba"]
+[ext_resource type="Script" path="res://Scripts/enemy_spawner.gd" id="2_s8eba"]
 [ext_resource type="AudioStream" uid="uid://dqnoevl72c4eb" path="res://Assets/Audio/ambience.mp3" id="4_olto2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mpuj"]

@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dqlrvwg7pko3g"]
 
 [ext_resource type="Texture2D" uid="uid://vfn54hajmrmo" path="res://Assets/Backgorund/background.png" id="1_swrl1"]
-[ext_resource type="FontFile" uid="uid://qj7q5icww1ip" path="res://Assets/Melted Monster.ttf" id="2_m2c6w"]
-[ext_resource type="Script" path="res://stats.gd" id="3_8xr0j"]
-[ext_resource type="Script" path="res://Scenes/quit_to_menu.gd" id="4_71vk8"]
+[ext_resource type="FontFile" uid="uid://qj7q5icww1ip" path="res://Assets/Fonts/Melted Monster.ttf" id="2_m2c6w"]
+[ext_resource type="Script" path="res://Scripts/stats.gd" id="3_8xr0j"]
+[ext_resource type="Script" path="res://Scripts/quit_to_menu.gd" id="4_71vk8"]
 
 [node name="DeathScreen" type="Node2D"]
 

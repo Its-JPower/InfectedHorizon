@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://qj7q5icww1ip"
-path="res://.godot/imported/Melted Monster.ttf-4345d967c8dacbcb32db8ef16aa7e4f3.fontdata"
+uid="uid://lldbuamortmb"
+path="res://.godot/imported/VintageBrush.otf-41995336966865127ae5da267f537c5a.fontdata"
 
 [deps]
 
-source_file="res://Assets/Melted Monster.ttf"
-dest_files=["res://.godot/imported/Melted Monster.ttf-4345d967c8dacbcb32db8ef16aa7e4f3.fontdata"]
+source_file="res://Assets/Fonts/VintageBrush.otf"
+dest_files=["res://.godot/imported/VintageBrush.otf-41995336966865127ae5da267f537c5a.fontdata"]
 
 [params]
 

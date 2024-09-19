@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://si3bxo7wpfxg"
-path="res://.godot/imported/Pain Hud.png-4a5a18aff8688719a1834748bc0d2f0e.ctex"
+uid="uid://bw8e76g0d4xji"
+path="res://.godot/imported/zombie.png-5ac82b8a387da5aec7d1e6903f023c7b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Pain Hud.png"
-dest_files=["res://.godot/imported/Pain Hud.png-4a5a18aff8688719a1834748bc0d2f0e.ctex"]
+source_file="res://Assets/Enemy/zombie.png"
+dest_files=["res://.godot/imported/zombie.png-5ac82b8a387da5aec7d1e6903f023c7b.ctex"]
 
 [params]
 

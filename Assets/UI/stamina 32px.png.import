@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bw8e76g0d4xji"
-path="res://.godot/imported/zombie.png-81b6268cc3bef8fe71dcc77830b9ed2e.ctex"
+uid="uid://ehqyq7swit8v"
+path="res://.godot/imported/stamina 32px.png-b039aec472162150d1b2344ab56714a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/zombie.png"
-dest_files=["res://.godot/imported/zombie.png-81b6268cc3bef8fe71dcc77830b9ed2e.ctex"]
+source_file="res://Assets/UI/stamina 32px.png"
+dest_files=["res://.godot/imported/stamina 32px.png-b039aec472162150d1b2344ab56714a6.ctex"]
 
 [params]
 

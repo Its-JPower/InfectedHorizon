@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://btpw5qixk7dk"]
 
-[ext_resource type="Script" path="res://Scenes/Start.gd" id="1_acm11"]
+[ext_resource type="Script" path="res://Scripts/Start.gd" id="1_acm11"]
 [ext_resource type="Texture2D" uid="uid://vfn54hajmrmo" path="res://Assets/Backgorund/background.png" id="1_v22fa"]
 [ext_resource type="Texture2D" uid="uid://t0yfvamxcy08" path="res://Assets/Backgorund/title.png" id="2_hvwrl"]
-[ext_resource type="Script" path="res://Scenes/options.gd" id="4_kuwfo"]
+[ext_resource type="Script" path="res://Scripts/options.gd" id="4_kuwfo"]
 [ext_resource type="AudioStream" uid="uid://ckym3sneqs6wq" path="res://Assets/Audio/main_menu.mp3" id="5_a1fep"]
-[ext_resource type="Script" path="res://Scenes/quit.gd" id="5_ih0nl"]
-[ext_resource type="Script" path="res://Scenes/mainmusic_slider.gd" id="6_2iwly"]
-[ext_resource type="Script" path="res://Scenes/exitoptions.gd" id="7_2lc8l"]
-[ext_resource type="Script" path="res://Scenes/Menu Music.gd" id="9_keit0"]
+[ext_resource type="Script" path="res://Scripts/quit.gd" id="5_ih0nl"]
+[ext_resource type="Script" path="res://Scripts/mainmusic_slider.gd" id="6_7jbhq"]
+[ext_resource type="Script" path="res://Scripts/exitoptions.gd" id="7_2lc8l"]
+[ext_resource type="Script" path="res://Scripts/Menu Music.gd" id="9_keit0"]
 
 [node name="Menu" type="Node2D"]
 
@@ -163,8 +163,7 @@ layout_mode = 2
 max_value = 1.0
 step = 0.001
 value = 1.0
-script = ExtResource("6_2iwly")
-bus_name = "Master"
+script = ExtResource("6_7jbhq")
 
 [node name="MusicText" type="RichTextLabel" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
 layout_mode = 2
@@ -176,8 +175,7 @@ scroll_active = false
 layout_mode = 2
 max_value = 1.0
 step = 0.001
-script = ExtResource("6_2iwly")
-bus_name = "Music"
+script = ExtResource("6_7jbhq")
 
 [node name="SfxText" type="RichTextLabel" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
 layout_mode = 2
@@ -189,8 +187,7 @@ scroll_active = false
 layout_mode = 2
 max_value = 1.0
 step = 0.001
-script = ExtResource("6_2iwly")
-bus_name = "Sfx"
+script = ExtResource("6_7jbhq")
 
 [node name="AmbienceText" type="RichTextLabel" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
 layout_mode = 2
@@ -202,8 +199,7 @@ scroll_active = false
 layout_mode = 2
 max_value = 1.0
 step = 0.001
-script = ExtResource("6_2iwly")
-bus_name = "Ambience"
+script = ExtResource("6_7jbhq")
 
 [node name="HSeparator" type="HSeparator" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
 layout_mode = 2

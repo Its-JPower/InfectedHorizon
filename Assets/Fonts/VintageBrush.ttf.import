@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://lldbuamortmb"
-path="res://.godot/imported/VintageBrush.otf-7c73421d460db166b3da8ab2ee01033a.fontdata"
+uid="uid://dvbq81defttnj"
+path="res://.godot/imported/VintageBrush.ttf-016f2aae6e3f0f68803be91ac2ae75bd.fontdata"
 
 [deps]
 
-source_file="res://Assets/VintageBrush.otf"
-dest_files=["res://.godot/imported/VintageBrush.otf-7c73421d460db166b3da8ab2ee01033a.fontdata"]
+source_file="res://Assets/Fonts/VintageBrush.ttf"
+dest_files=["res://.godot/imported/VintageBrush.ttf-016f2aae6e3f0f68803be91ac2ae75bd.fontdata"]
 
 [params]
 

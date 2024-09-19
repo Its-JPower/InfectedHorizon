@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://btsrn41odfetm"]
 
-[ext_resource type="Texture2D" uid="uid://dm7mggruqnxbd" path="res://Assets/guns/2D Pickups v6.2 spritesheet.png" id="1_ixwca"]
-[ext_resource type="Script" path="res://Scenes/ammo.gd" id="1_r3fju"]
+[ext_resource type="Texture2D" uid="uid://dm7mggruqnxbd" path="res://Assets/Guns/2D Pickups v6.2 spritesheet.png" id="1_ixwca"]
+[ext_resource type="Script" path="res://Scripts/ammo.gd" id="1_r3fju"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kjkdl"]
 

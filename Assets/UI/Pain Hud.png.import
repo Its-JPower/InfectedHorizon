@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyy5v8v2ky3lw"
-path="res://.godot/imported/shop_icon_pressed.png-0599ac9625c7eb6020053c09b08a6de3.ctex"
+uid="uid://ctnd2e216psx0"
+path="res://.godot/imported/Pain Hud.png-6937c943df25d96f96757d7b7fd91220.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/shop_icon_pressed.png"
-dest_files=["res://.godot/imported/shop_icon_pressed.png-0599ac9625c7eb6020053c09b08a6de3.ctex"]
+source_file="res://Assets/UI/Pain Hud.png"
+dest_files=["res://.godot/imported/Pain Hud.png-6937c943df25d96f96757d7b7fd91220.ctex"]
 
 [params]
 

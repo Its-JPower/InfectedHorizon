@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://38u5ybgh5tlu"
-path="res://.godot/imported/muzzle_flash.png-4a498d2d28e689f4dc307fd863770b0a.ctex"
+path="res://.godot/imported/muzzle_flash.png-5437e44bc72f39f6b21dbc39e8f334c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/guns/muzzle_flash.png"
-dest_files=["res://.godot/imported/muzzle_flash.png-4a498d2d28e689f4dc307fd863770b0a.ctex"]
+source_file="res://Assets/Guns/muzzle_flash.png"
+dest_files=["res://.godot/imported/muzzle_flash.png-5437e44bc72f39f6b21dbc39e8f334c2.ctex"]
 
 [params]
 
