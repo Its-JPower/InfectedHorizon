@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7ou8i2jgqktk"
-path="res://.godot/imported/health-green 32px.png-f1807dc1e5e8ec56d16a9ffd9954a894.ctex"
+uid="uid://dm7mggruqnxbd"
+path="res://.godot/imported/2D Pickups v6.2 spritesheet.png-1a00e8e17b3ac47a5b6bf40c899fb040.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/health-green 32px.png"
-dest_files=["res://.godot/imported/health-green 32px.png-f1807dc1e5e8ec56d16a9ffd9954a894.ctex"]
+source_file="res://Assets/guns/2D Pickups v6.2 spritesheet.png"
+dest_files=["res://.godot/imported/2D Pickups v6.2 spritesheet.png-1a00e8e17b3ac47a5b6bf40c899fb040.ctex"]
 
 [params]
 

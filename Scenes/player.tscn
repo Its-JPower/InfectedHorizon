@@ -1,4 +1,4 @@
-[gd_scene load_steps=165 format=3 uid="uid://c62d041f84rpk"]
+[gd_scene load_steps=166 format=3 uid="uid://c62d041f84rpk"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_iskqk"]
 [ext_resource type="Texture2D" uid="uid://crvhq76isgb8c" path="res://Assets/Player/player_rifle.png" id="2_ai7lf"]
@@ -25,12 +25,13 @@
 [ext_resource type="Texture2D" uid="uid://dyy5v8v2ky3lw" path="res://Assets/shop_icon_pressed.png" id="20_ad01n"]
 [ext_resource type="Script" path="res://Scenes/shop_button.gd" id="21_poa1u"]
 [ext_resource type="Texture2D" uid="uid://c8jah7hynmwia" path="res://Assets/light.png" id="21_xncpl"]
-[ext_resource type="Texture2D" uid="uid://7ou8i2jgqktk" path="res://Assets/health-green 32px.png" id="22_4f0aw"]
+[ext_resource type="Texture2D" uid="uid://7ou8i2jgqktk" path="res://Assets/guns/health-green 32px.png" id="22_4f0aw"]
 [ext_resource type="Script" path="res://Scenes/shop.gd" id="22_k5sn4"]
 [ext_resource type="Texture2D" uid="uid://ehqyq7swit8v" path="res://Assets/stamina 32px.png" id="23_0ijc8"]
-[ext_resource type="Texture2D" uid="uid://bikg00gghcubw" path="res://Assets/ammo-rifle 32px.png" id="24_81biw"]
-[ext_resource type="Texture2D" uid="uid://cupg4i3x6witf" path="res://Assets/ammo-pistol 32px.png" id="25_rsuq1"]
-[ext_resource type="Texture2D" uid="uid://bo8f6f6uu6efm" path="res://Assets/health-red 32px.png" id="26_npisn"]
+[ext_resource type="Texture2D" uid="uid://bikg00gghcubw" path="res://Assets/guns/ammo-rifle 32px.png" id="24_81biw"]
+[ext_resource type="Texture2D" uid="uid://cupg4i3x6witf" path="res://Assets/guns/ammo-pistol 32px.png" id="25_rsuq1"]
+[ext_resource type="Texture2D" uid="uid://bo8f6f6uu6efm" path="res://Assets/guns/health-red 32px.png" id="26_npisn"]
+[ext_resource type="Script" path="res://Scenes/info.gd" id="29_350nf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kibkg"]
 atlas = ExtResource("2_vry05")
@@ -1601,6 +1602,19 @@ icon = ExtResource("26_npisn")
 layout_mode = 2
 text = "Upgrade Movement Speed $5000"
 icon = ExtResource("26_npisn")
+
+[node name="Info" type="Label" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -0.5
+offset_right = 0.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "ⓘ W-A-S-D to Move"
+horizontal_alignment = 1
+script = ExtResource("29_350nf")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.08, 0.08)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dm7mggruqnxbd"
-path="res://.godot/imported/2D Pickups v6.2 spritesheet.png-207812b0e607abf8d658f4a093c24e77.ctex"
+uid="uid://km0aiglc18kn"
+path="res://.godot/imported/enemy_health_bar_foreground_004.png-6cb29b0f6735dd0ea5e1fe7d440b3c36.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/2D Pickups v6.2 spritesheet.png"
-dest_files=["res://.godot/imported/2D Pickups v6.2 spritesheet.png-207812b0e607abf8d658f4a093c24e77.ctex"]
+source_file="res://Assets/Progress Bars/enemy_health_bar_foreground_004.png"
+dest_files=["res://.godot/imported/enemy_health_bar_foreground_004.png-6cb29b0f6735dd0ea5e1fe7d440b3c36.ctex"]
 
 [params]
 

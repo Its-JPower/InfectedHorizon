@@ -65,10 +65,10 @@ func _on_btn_pistol_mag_pressed() -> void:
 		var current_level = ShopManager.shop_prices["pistol_mag"]["current"]
 		var max_level = ShopManager.shop_prices["pistol_mag"]["max"]
 		if current_level >= max_level:
-			btn_pistol_mag.text = "Max Pistol Magazine"
+			btn_pistol_mag.text = "Max Handgun Magazine"
 		else:
 			var next_price = ShopManager.shop_prices["pistol_mag"][current_level + 1]
-			btn_pistol_mag.text = "Upgrade Pistol Magazine $" + str(next_price)
+			btn_pistol_mag.text = "Upgrade Handgun Magazine $" + str(next_price)
 
 func _on_btn_walk_speed_pressed() -> void:
 	if ShopManager.bought_item("walk_speed") == "success":
@@ -86,4 +86,4 @@ func _on_btn_half_heal_pressed() -> void:
 
 func _on_btn_full_heal_pressed() -> void:
 	if ShopManager.buy_heal("full") == "success":
-		btn_half_heal.text = "Purchase Full Heal $"+str(ShopManager.full_price*ShopManager.full_amount)
+		btn_full_heal.text = "Purchase Full Heal $"+str(ShopManager.full_price*ShopManager.full_amount)

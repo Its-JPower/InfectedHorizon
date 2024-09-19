@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://4lxbjcau8k28"]
+
+[node name="Tutorial" type="Window"]
+initial_position = 2
+content_scale_aspect = 1

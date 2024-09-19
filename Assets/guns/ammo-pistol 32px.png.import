@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bo8f6f6uu6efm"
-path="res://.godot/imported/health-red 32px.png-e3f1c3aa18023c002c4ec75bbd7b9d35.ctex"
+uid="uid://cupg4i3x6witf"
+path="res://.godot/imported/ammo-pistol 32px.png-01948590db6530be33065537fa945a1e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/health-red 32px.png"
-dest_files=["res://.godot/imported/health-red 32px.png-e3f1c3aa18023c002c4ec75bbd7b9d35.ctex"]
+source_file="res://Assets/guns/ammo-pistol 32px.png"
+dest_files=["res://.godot/imported/ammo-pistol 32px.png-01948590db6530be33065537fa945a1e.ctex"]
 
 [params]
 

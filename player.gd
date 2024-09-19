@@ -36,6 +36,8 @@ var current_ammo = 0
 
 
 func _ready():
+	PlayerStats.UpdateMaxHealth.connect(_on_max_health_update)
+	PlayerStats.UpdateMaxStamina.connect(_on_max_stamina_update)
 	stamina_bar.value = PlayerStats.stamina
 	var grid_container = $UI/Control/Hotbar
 	for button in grid_container.get_children():
@@ -192,6 +194,11 @@ func _on_pickup_zone_area_entered(area: Area2D) -> void:
 		if area.has_method("collect"):
 			area.collect()
 
-
 func die():
 	get_tree().change_scene_to_file("res://Scenes/death_screen.tscn")
+
+func _on_max_health_update(value):
+	health_bar.max_value = value
+
+func _on_max_stamina_update(value):
+	stamina_bar.max_value = value

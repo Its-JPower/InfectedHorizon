@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://buffv7t3mk5ia"]
 
 [ext_resource type="Script" path="res://Scenes/bullet.gd" id="1_mkyku"]
-[ext_resource type="Texture2D" uid="uid://rw8vlflddtcj" path="res://Assets/bullet.png" id="2_a13x8"]
+[ext_resource type="Texture2D" uid="uid://rw8vlflddtcj" path="res://Assets/guns/bullet.png" id="2_a13x8"]
 [ext_resource type="AudioStream" uid="uid://bpy25i2tipmwm" path="res://Assets/Audio/handgun.wav" id="3_fugd8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8atw7"]

@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+signal position_changed(new_position: Vector2)
 
 var speed = 100
 var player_chase = false
@@ -7,7 +8,7 @@ var player: Node2D = null
 @export var health: float = 100.0
 @export var max_health: float = 100.0
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
-@onready var progress_bar: ProgressBar = $ProgressBar
+@onready var progress_bar: TextureProgressBar = $HealthBar
 @onready var world: Node2D = $".."
 @onready var enemy_spawner: Node2D = $"../Player/Camera2D/EnemySpawner"
 const AMMO = preload("res://Scenes/ammo.tscn")
@@ -20,7 +21,8 @@ func _ready():
 	player = get_tree().get_first_node_in_group("Player")
 
 func _process(delta: float) -> void:
-	progress_bar.rotation = 0
+	progress_bar.rotation = 0-rotation
+	emit_signal("position_changed", global_position)
 	if isinrange:
 		handle_attack(0)
 
@@ -83,7 +85,7 @@ func enemy_die():
 	var new_ammo = AMMO.instantiate()
 	new_ammo.global_position = global_position
 	add_sibling(new_ammo)
-	if PlayerStats.zombies <= 0:
+	if PlayerStats.zombies <= 0 and PlayerStats.count <= 0:
 		PlayerStats.wave_progress += 1
 		PlayerStats.currency += (250*PlayerStats.wave_progress/4)
 		world.spawnWave(PlayerStats.wave_amount[PlayerStats.wave_progress])
