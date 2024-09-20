@@ -3,13 +3,13 @@ extends Button
 var paused = false
 @onready var control = $".."
 
-func _pressed():
+func _pressed(): # Continues play once pressed
 	paused = false
 	PlayerStats.is_paused = !PlayerStats.is_paused
 	get_tree().paused = !get_tree().paused
 	control.visible = !control.visible
 
-func _input(event):
+func _input(event): Continues play if ESC is pressed
 	if Input.is_action_just_pressed("pause") and paused == false:
 		paused = true
 		PlayerStats.is_paused = !PlayerStats.is_paused

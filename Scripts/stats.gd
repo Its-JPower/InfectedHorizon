@@ -2,7 +2,7 @@ extends RichTextLabel
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func _ready() -> void: # Stats list that displays when you die
 	text = "Total Damage: " + str(PlayerStats.total_damage) + "
 	Total Money: " + str(PlayerStats.total_currency) + "
 	Total Zombies Killed: " + str(PlayerStats.total_kills) + "

@@ -7,7 +7,7 @@ extends Node2D
 const ZOMBIE = preload("res://Scenes/zombie.tscn")
 
 
-func spawn_enemy():
+func spawn_enemy(): #Function that adds an enemy as a child of the world scene
 	var enemy = ZOMBIE.instantiate()
 	var spawn_point = spawn_points.pick_random()
 	enemy.global_position = spawn_point.global_position

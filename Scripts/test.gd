@@ -3,7 +3,7 @@ extends RichTextLabel
 var time_passed: float = 0.0
 var timer: int = 0
 
-func _process(delta: float) -> void:
+func _process(delta: float) -> void: # Timer counter that counts when not paused
 	if not PlayerStats.is_paused:
 		time_passed += delta
 		if time_passed >= 1.0:
@@ -11,7 +11,7 @@ func _process(delta: float) -> void:
 			timer += 1
 	update_stats()
 
-func update_stats() -> void:
+func update_stats() -> void: # Convert the timer time to minutes and seconds, and updates the info HUD
 	# Assuming PlayerStats is a singleton or autoload
 	PlayerStats.time_minutes = timer / 60
 	PlayerStats.time_seconds = timer % 60

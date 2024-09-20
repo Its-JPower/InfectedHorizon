@@ -17,11 +17,11 @@ var isinrange = false
 const DAMAGE_INDICATOR = preload("res://Scenes/damage_indicator.tscn")
 
 func _ready():
-	progress_bar.value = health
+	progress_bar.value = health # Update initial enemy health bar
 	player = get_tree().get_first_node_in_group("Player")
 
 func _process(delta: float) -> void:
-	progress_bar.rotation = 0-rotation
+	progress_bar.rotation = 0-rotation # Cancel health bar rotaton
 	emit_signal("position_changed", global_position)
 	if isinrange:
 		handle_attack(0)
@@ -34,23 +34,23 @@ func _physics_process(delta: float) -> void:
 	if anim_player.current_animation != "move" and anim_player.current_animation != "attack": # Play the "move" animation if not already playing
 		anim_player.play("move")
 
-func handle_attack(attack_origin : int):
-	if anim_player.current_animation != "attack":
-		anim_player.play("attack")
-		if PlayerStats.health - PlayerStats.damage[attack_origin] <= 0 and isinrange:
+func handle_attack(attack_origin : int): # handles attacking the player
+	if anim_player.current_animation != "attack": 
+		anim_player.play("attack") # plays attack animation
+		if PlayerStats.health - PlayerStats.damage[attack_origin] <= 0 and isinrange: # tests if the attack will kill the player, if it will executes PlayerStats.die()
 			await anim_player.animation_finished
 			if isinrange:
 				PlayerStats.health -= PlayerStats.damage[attack_origin]
 				PlayerStats.health = min(PlayerStats.health, 0)
 				PlayerStats.UpdateHealth.emit()
 				PlayerStats.die(attack_origin)
-		elif isinrange:
+		elif isinrange: # if doesn't kill player, just deals damage
 			await anim_player.animation_finished
 			if isinrange:
 				PlayerStats.health -= PlayerStats.damage[attack_origin]
 				PlayerStats.UpdateHealth.emit()
 
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+func _on_animation_player_animation_finished(anim_name: StringName) -> void: # Handle playing move animation once attack animation has finished
 	if anim_name == "attack" and velocity != Vector2.ZERO:
 		anim_player.play("move")
 	elif anim_name == "attack":
@@ -61,28 +61,28 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 		player = body
 		player_chase = true
 
-func _on_detection_area_2_body_entered(body: Node2D) -> void:
+func _on_detection_area_2_body_entered(body: Node2D) -> void: # This is the attack range area
 	if body.is_in_group("Player"):
 		velocity = Vector2.ZERO
 		isinrange = true
-		handle_attack(0)
+		handle_attack(0) # Triggers the attack
 
 func _on_detection_area_2_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		isinrange = false
+		isinrange = false # if player leaves attack range, attack won't work
 
-func update_health(value,max_value):
+func update_health(value,max_value): # update the max value and value of the enemy's health bar
 	progress_bar.max_value = max_value
 	progress_bar.value = value
 
-func enemy_die():
+func enemy_die(): # Triggers the death of the enemy, which adds a variety of stats and spawns an ammo drop.
 	PlayerStats.total_kills += 1
 	PlayerStats.currency += 100
 	PlayerStats.total_currency += 100
 	PlayerStats.score += 10
 	PlayerStats.zombies -= 1
 	queue_free()
-	var new_ammo = AMMO.instantiate()
+	var new_ammo = AMMO.instantiate() # Ammo pickup
 	new_ammo.global_position = global_position
 	add_sibling(new_ammo)
 	if PlayerStats.zombies <= 0 and PlayerStats.count <= 0:
@@ -90,7 +90,7 @@ func enemy_die():
 		PlayerStats.currency += (250*PlayerStats.wave_progress/4)
 		world.spawnWave(PlayerStats.wave_amount[PlayerStats.wave_progress])
 
-func spawn_effect(EFFECT: PackedScene, effect_position: Vector2 = global_position):
+func spawn_effect(EFFECT: PackedScene, effect_position: Vector2 = global_position): # This handles spawning the damage indicator
 	if EFFECT:
 		var effect = EFFECT.instantiate()
 		get_tree().current_scene.add_child(effect)
@@ -98,6 +98,6 @@ func spawn_effect(EFFECT: PackedScene, effect_position: Vector2 = global_positio
 		effect.label.text = str(PlayerStats.weapons[PlayerStats.equipped_weapon]["damage"])
 	
 
-func spawn_dmgIndicator(damage):
+func spawn_dmgIndicator(damage): # Self explanatory
 	var indicator = spawn_effect(DAMAGE_INDICATOR)
 	#indicator.label.text = str(damage)
