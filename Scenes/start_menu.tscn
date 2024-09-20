@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/quit.gd" id="5_ih0nl"]
 [ext_resource type="Script" path="res://Scripts/mainmusic_slider.gd" id="6_7jbhq"]
 [ext_resource type="Script" path="res://Scripts/exitoptions.gd" id="7_2lc8l"]
-[ext_resource type="Script" path="res://Scripts/Menu Music.gd" id="9_keit0"]
+[ext_resource type="Script" path="res://Scenes/menu_music.gd" id="9_af43j"]
 
 [node name="Menu" type="Node2D"]
 
@@ -164,6 +164,7 @@ max_value = 1.0
 step = 0.001
 value = 1.0
 script = ExtResource("6_7jbhq")
+bus_name = "Master"
 
 [node name="MusicText" type="RichTextLabel" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
 layout_mode = 2
@@ -176,6 +177,7 @@ layout_mode = 2
 max_value = 1.0
 step = 0.001
 script = ExtResource("6_7jbhq")
+bus_name = "Music"
 
 [node name="SfxText" type="RichTextLabel" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
 layout_mode = 2
@@ -188,6 +190,7 @@ layout_mode = 2
 max_value = 1.0
 step = 0.001
 script = ExtResource("6_7jbhq")
+bus_name = "Sfx"
 
 [node name="AmbienceText" type="RichTextLabel" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
 layout_mode = 2
@@ -200,6 +203,7 @@ layout_mode = 2
 max_value = 1.0
 step = 0.001
 script = ExtResource("6_7jbhq")
+bus_name = "Ambience"
 
 [node name="HSeparator" type="HSeparator" parent="Camera2D/CanvasLayer/Options/VBoxContainer"]
 layout_mode = 2
@@ -232,4 +236,6 @@ process_mode = 3
 stream = ExtResource("5_a1fep")
 autoplay = true
 bus = &"Music"
-script = ExtResource("9_keit0")
+script = ExtResource("9_af43j")
+
+[connection signal="finished" from="Menu Music" to="Menu Music" method="_on_finished"]

@@ -1,0 +1,93 @@
+[gd_scene load_steps=5 format=3 uid="uid://djmnxwwnxpydk"]
+
+[ext_resource type="Texture2D" uid="uid://vfn54hajmrmo" path="res://Assets/Backgorund/background.png" id="1_e7lec"]
+[ext_resource type="FontFile" uid="uid://qj7q5icww1ip" path="res://Assets/Fonts/Melted Monster.ttf" id="2_eowof"]
+[ext_resource type="Script" path="res://Scripts/stats.gd" id="3_n7ulo"]
+[ext_resource type="Script" path="res://Scripts/quit_to_menu.gd" id="4_xhmi0"]
+
+[node name="DeathScreen" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="TextureRect" type="TextureRect" parent="Camera2D/CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_e7lec")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="deathtext" type="RichTextLabel" parent="Camera2D/CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -306.0
+offset_right = 306.0
+offset_bottom = 189.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0.466667, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.227451, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_eowof")
+theme_override_font_sizes/normal_font_size = 151
+text = "YOU SURVIVED!"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Panel" type="Panel" parent="Camera2D/CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -117.0
+offset_top = -78.5
+offset_right = 117.0
+offset_bottom = 78.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Stats" type="RichTextLabel" parent="Camera2D/CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -57.5
+offset_right = 96.0
+offset_bottom = 57.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "Total Damage: 12345
+Total Money: 6789
+Total Zombies Killed: 150
+Total Waves Survived: 20
+Time Taken: 10m 30s"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("3_n7ulo")
+
+[node name="Quit" type="Button" parent="Camera2D/CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -55.5
+offset_top = -111.0
+offset_right = 55.5
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Quit to Menu"
+script = ExtResource("4_xhmi0")

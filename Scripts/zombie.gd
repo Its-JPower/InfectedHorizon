@@ -81,14 +81,14 @@ func enemy_die(): # Triggers the death of the enemy, which adds a variety of sta
 	PlayerStats.total_currency += 100
 	PlayerStats.score += 10
 	PlayerStats.zombies -= 1
-	queue_free()
 	var new_ammo = AMMO.instantiate() # Ammo pickup
 	new_ammo.global_position = global_position
 	add_sibling(new_ammo)
-	if PlayerStats.zombies <= 0 and PlayerStats.count <= 0:
+	if PlayerStats.zombies <= 0:
 		PlayerStats.wave_progress += 1
 		PlayerStats.currency += (250*PlayerStats.wave_progress/4)
 		world.spawnWave(PlayerStats.wave_amount[PlayerStats.wave_progress])
+	queue_free()
 
 func spawn_effect(EFFECT: PackedScene, effect_position: Vector2 = global_position): # This handles spawning the damage indicator
 	if EFFECT:

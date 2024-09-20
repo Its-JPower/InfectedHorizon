@@ -7,7 +7,7 @@ func _ready() -> void:
 	spawnWave(PlayerStats.wave_amount[PlayerStats.wave_progress])
 
 func spawnWave(count : int): # Spawns a wave of zombies, 'count' is a queue, the zombies queue up and wait to be spawned
-	if PlayerStats.zombies == 0:
+	if PlayerStats.zombies <= 0:
 		await get_tree().create_timer(4.0).timeout
 	while count > 0:
 		await get_tree().create_timer(1.0).timeout
@@ -15,3 +15,10 @@ func spawnWave(count : int): # Spawns a wave of zombies, 'count' is a queue, the
 		count -= 1 # Minus 1 from queue
 		enemy_spawner.spawn_enemy() # Spawns enemy from queue
 		PlayerStats.zombies += 1 # Adds a zombie to total alive zombies
+	if PlayerStats.wave_progress == 20:
+		get_tree().change_scene_to_file("res://Scenes/win_screen.tscn")
+
+func _process(delta: float) -> void:
+	await get_tree().create_timer(10.0).timeout
+	if PlayerStats.zombies <= 0:
+		spawnWave(PlayerStats.wave_amount[PlayerStats.wave_progress])

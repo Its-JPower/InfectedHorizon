@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://mo50xpvqqlmo"]
+[gd_scene load_steps=10 format=3 uid="uid://mo50xpvqqlmo"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_jcchn"]
 [ext_resource type="PackedScene" uid="uid://c62d041f84rpk" path="res://Scenes/player.tscn" id="1_oxrfq"]
 [ext_resource type="Texture2D" uid="uid://ccsy542tvwoun" path="res://Assets/Backgorund/GRASS+.png" id="2_kxtfk"]
 [ext_resource type="Script" path="res://Scripts/enemy_spawner.gd" id="2_s8eba"]
 [ext_resource type="AudioStream" uid="uid://dqnoevl72c4eb" path="res://Assets/Audio/ambience.mp3" id="4_olto2"]
+[ext_resource type="Script" path="res://Scenes/ambience.gd" id="6_cvgns"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mpuj"]
 texture = ExtResource("2_kxtfk")
@@ -109,7 +110,7 @@ terrain_set_1/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_7mpuj")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ldki7"]
-size = Vector2(227.838, 5023.64)
+size = Vector2(1653.92, 6367.81)
 
 [node name="World" type="Node2D"]
 process_mode = 1
@@ -231,31 +232,31 @@ autostart = true
 stream = ExtResource("4_olto2")
 autoplay = true
 bus = &"Ambience"
+script = ExtResource("6_cvgns")
 
 [node name="WorldBorder" type="StaticBody2D" parent="."]
 position = Vector2(-3, -54)
-collision_layer = 3
-collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorder"]
-position = Vector2(-179.913, 2706.67)
+position = Vector2(486.076, 3296.85)
 rotation = 1.56611
 shape = SubResource("RectangleShape2D_ldki7")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="WorldBorder"]
-position = Vector2(-166, -1620)
+position = Vector2(-154, -2285)
 rotation = 1.56611
 shape = SubResource("RectangleShape2D_ldki7")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="WorldBorder"]
-position = Vector2(-2597, 540)
+position = Vector2(-3304, 564)
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_ldki7")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="WorldBorder"]
-position = Vector2(2214, 597)
+position = Vector2(2927.04, 596.998)
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_ldki7")
 
 [connection signal="Shot" from="Player" to="Player/Camera2D" method="_on_player_shot"]
 [connection signal="timeout" from="Player/Camera2D/EnemySpawner/SpawnTimer" to="Player/Camera2D/EnemySpawner" method="_on_spawn_timer_timeout"]
+[connection signal="finished" from="Ambience" to="Ambience" method="_on_finished"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=166 format=3 uid="uid://c62d041f84rpk"]
+[gd_scene load_steps=169 format=3 uid="uid://c62d041f84rpk"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_iskqk"]
 [ext_resource type="Texture2D" uid="uid://crvhq76isgb8c" path="res://Assets/Player/player_rifle.png" id="2_ai7lf"]
@@ -31,7 +31,10 @@
 [ext_resource type="Texture2D" uid="uid://bikg00gghcubw" path="res://Assets/Guns/ammo-rifle 32px.png" id="24_81biw"]
 [ext_resource type="Texture2D" uid="uid://cupg4i3x6witf" path="res://Assets/Guns/ammo-pistol 32px.png" id="25_rsuq1"]
 [ext_resource type="Texture2D" uid="uid://bo8f6f6uu6efm" path="res://Assets/Guns/health-red 32px.png" id="26_npisn"]
+[ext_resource type="AudioStream" uid="uid://cs0ua2jcsmk8v" path="res://Assets/Audio/purchase.mp3" id="29_82hel"]
 [ext_resource type="Script" path="res://Scripts/info.gd" id="29_350nf"]
+[ext_resource type="AudioStream" uid="uid://cassvr56luh6b" path="res://Assets/Audio/error.mp3" id="30_h6xk0"]
+[ext_resource type="AudioStream" uid="uid://74g5jflp8f5q" path="res://Assets/Audio/reload.mp3" id="35_jfsdj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kibkg"]
 atlas = ExtResource("2_vry05")
@@ -1603,6 +1606,14 @@ layout_mode = 2
 text = "Upgrade Movement Speed $5000"
 icon = ExtResource("26_npisn")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/Control/Shop"]
+stream = ExtResource("29_82hel")
+bus = &"Sfx"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="UI/Control/Shop"]
+stream = ExtResource("30_h6xk0")
+bus = &"Sfx"
+
 [node name="Info" type="Label" parent="UI/Control"]
 layout_mode = 1
 anchors_preset = 5
@@ -1647,6 +1658,11 @@ shape = SubResource("CapsuleShape2D_h4ips")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 texture = ExtResource("21_xncpl")
 texture_scale = 0.25
+
+[node name="Reload" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("35_jfsdj")
+volume_db = -5.0
+bus = &"Sfx"
 
 [connection signal="GunSwapped" from="UI/Control/Hotbar" to="." method="_on_hotbar_gun_swapped"]
 [connection signal="pressed" from="UI/Control/Hotbar/handgun" to="UI/Control/Hotbar" method="_on_handgun_pressed"]

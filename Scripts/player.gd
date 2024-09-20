@@ -16,6 +16,7 @@ signal Shot
 @onready var anim_player = $AnimationPlayer
 @onready var stamina_bar = $UI/Control/Stamina
 @onready var camera = $Camera2D # Reference to the Camera2D node
+@onready var reload: AudioStreamPlayer = $Reload
 var scoped : bool = false
 var shooting : bool = false
 var reloading : bool = false
@@ -91,7 +92,7 @@ func handle_movement(delta): # Detects W-A-S_D input and moves the player accord
 		velocity = velocity.move_toward(Vector2.ZERO, friction) # Stop movement if there is no input
 	if velocity == Vector2.ZERO and anim_player.current_animation != PlayerStats.equipped_weapon+"_reload" and anim_player.current_animation != PlayerStats.equipped_weapon+"_shoot": # Changes animation if not reloading, moving or shooting to idle
 		anim_player.play(PlayerStats.equipped_weapon+"_idle")
-	elif velocity != Vector2.ZERO and anim_player.current_animation != PlayerStats.equipped_weapon+"_reload" and anim_player.current_animation != PlayerStats.equipped_weapon+"_shoot": Changes animation if not reloading or shooting to move
+	elif velocity != Vector2.ZERO and anim_player.current_animation != PlayerStats.equipped_weapon+"_reload" and anim_player.current_animation != PlayerStats.equipped_weapon+"_shoot": #Changes animation if not reloading or shooting to move
 		anim_player.play(PlayerStats.equipped_weapon+"_move")
 
 	if Input.is_action_just_pressed("reload"): # Detects press of reload, and triggers the handle function
@@ -131,6 +132,7 @@ func handle_reload(): # Handle reloading the magazines for both weapons
 		reloading = true
 		if anim_player.current_animation != PlayerStats.equipped_weapon+"_reload" and anim_player.current_animation != PlayerStats.equipped_weapon+"_shoot" and PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"] > 0:
 			anim_player.play(PlayerStats.equipped_weapon+"_reload")
+			reload.play(0.0)
 			if PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"] - ((PlayerStats.weapons[PlayerStats.equipped_weapon]["mag_size"] - PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"])) < 0:
 				current_ammo = PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"]
 				PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"] += PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"]
