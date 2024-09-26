@@ -36,7 +36,7 @@ var current_ammo = 0
 @onready var shop_button: TextureButton = $UI/Control/ShopButton
 
 
-func _ready():
+func _ready(): # triggers initial value updates such as making the stamina bar display the correct value
 	PlayerStats.UpdateMaxHealth.connect(_on_max_health_update) # Connects health update signal from the PlayerStats Singleton
 	PlayerStats.UpdateMaxStamina.connect(_on_max_stamina_update) # Connects stamina update signal from the PlayerStats Singleton
 	stamina_bar.value = PlayerStats.stamina
@@ -46,7 +46,7 @@ func _ready():
 			hotbar_buttons.append(button) #adds the hottbar buttons to an array
 	hotbar_buttons.append(shop_button)
 
-func _input(event):
+func _input(event): # This function detects all input and does soemthing for specific inputs e.g when left click, if click on the hotbar cancel the input
 	if event is InputEventMouseButton:
 		if event.pressed:
 			if not is_click_on_hotbar(event.position): # If the mouse input wasn't on the hotbar
@@ -59,11 +59,11 @@ func is_click_on_hotbar(mouse_position): # Detects if a mouse input was on a hot
 			return true
 	return false
 
-func _process(delta: float) -> void: # Updates gun info hud when not reloading and is the mag is not full
+func _process(delta: float) -> void: # Updates values every tick such as the gun info hud when not reloading and if the mag is not full
 	if not reloading and current_ammo != PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"]:
 		label.text = str(PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"])+"    "+str(PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"])+" | "+str(PlayerStats.weapons[PlayerStats.equipped_weapon]["mag_size"])
 
-func _physics_process(delta): # Runs the handle functions
+func _physics_process(delta): # Runs the handle functions e.g handle_movement handles moving the player and this makes sure it runs the function
 	health_bar.value = lerp(health_bar.value, PlayerStats.health, 1.0)
 	handle_movement(delta)
 	handle_rotation(delta)
@@ -72,7 +72,7 @@ func _physics_process(delta): # Runs the handle functions
 	move_and_collide(velocity * delta)
 	
 
-func handle_movement(delta): # Detects W-A-S_D input and moves the player accordingly 
+func handle_movement(delta): # Handles for the player e.g it detects W-A-S_D input and moves the player accordingly 
 	direction = Input.get_vector("left", "right", "up", "down").normalized()
 	if direction:
 		var speed = PlayerStats.walk_speed # variable for normal speed
@@ -98,7 +98,7 @@ func handle_movement(delta): # Detects W-A-S_D input and moves the player accord
 	if Input.is_action_just_pressed("reload"): # Detects press of reload, and triggers the handle function
 		handle_reload()
 
-func handle_rotation(delta): # Handles character rotation
+func handle_rotation(delta): # Handles character rotation, for example sets the inital rotation to a var and same with the target, and then smoothly rotates to it
 	if Input.is_action_pressed("scoped"):
 		rotation_speed = 10.0 # If scoped in it rotates faster
 		var mouse_position = get_global_mouse_position()
@@ -110,7 +110,7 @@ func handle_rotation(delta): # Handles character rotation
 		return
 	rotation = lerp_angle(rotation, target_rotation, rotation_speed * delta) # Smoothly rotate from a to b
 
-func handle_stamina(delta): # Handles the variables for stamina and the stamina bar
+func handle_stamina(delta): # This function handles the variables for stamina and the stamina bar e.g when sprinting it lowers the stamina, and disables sprint when reaches 0 until it fills up again
 	if PlayerStats.stamina == 0: # If reaches zero, disable the ability to sprint
 		can_use_stamina = false
 	elif PlayerStats.stamina >= PlayerStats.max_stamina: # Reenables that ability once the stamina is full
@@ -123,11 +123,11 @@ func handle_stamina(delta): # Handles the variables for stamina and the stamina 
 		PlayerStats.stamina = min(PlayerStats.stamina, PlayerStats.max_stamina) # Ensure stamina does not exceed max stamina
 	stamina_bar.value = PlayerStats.stamina # Update stamina bar
 
-func regen_stamina(_delta):
+func regen_stamina(_delta): # This function handles the refilling of stamina bar
 	var regen = stamina_regen_rate * pow(2, PlayerStats.stamina / PlayerStats.max_stamina)
 	return min(regen, max_regen_rate)
 
-func handle_reload(): # Handle reloading the magazines for both weapons
+func handle_reload(): # This function handles reloading the magazines for both weapons, e.g on relaod if the mag isnt full it sets it to max and renmoves the total amount added to the mag from the total ammp
 	if PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"] < PlayerStats.weapons[PlayerStats.equipped_weapon]["mag_size"]:
 		reloading = true
 		if anim_player.current_animation != PlayerStats.equipped_weapon+"_reload" and anim_player.current_animation != PlayerStats.equipped_weapon+"_shoot" and PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"] > 0:
@@ -142,7 +142,7 @@ func handle_reload(): # Handle reloading the magazines for both weapons
 				PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"] -= (PlayerStats.weapons[PlayerStats.equipped_weapon]["mag_size"] - PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"])
 				PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"] += (PlayerStats.weapons[PlayerStats.equipped_weapon]["mag_size"] - PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"])
 
-func _on_animation_player_animation_finished(anim_name): # Handles animation state once reload or shoot has ended (they don't loop)
+func _on_animation_player_animation_finished(anim_name): # This handles the animation state for non-looping animations e.g once reload or shoot has ended (they don't loop) sets the animation to idle if not moving or walk animation when is moving
 	if anim_name == PlayerStats.equipped_weapon+"_reload" or anim_name == PlayerStats.equipped_weapon+"_shoot":
 		if anim_name == PlayerStats.equipped_weapon+"_reload":
 			reloading = false # Notes that not currently reloading
@@ -154,7 +154,7 @@ func _on_animation_player_animation_finished(anim_name): # Handles animation sta
 		current_ammo = PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"]
 		label.text = str(PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"])+"    "+str(PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"])+" | "+str(PlayerStats.weapons[PlayerStats.equipped_weapon]["mag_size"])
 
-func instantiate_bullet(): # Spawn in bullet
+func instantiate_bullet(): # Handles spawning the bullet e.g spawns in an instance of the 'bullet'
 	if PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"] <= PlayerStats.weapons[PlayerStats.equipped_weapon]["mag_size"] and PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"] > 0: # Spawns a different bullet depending on the equipped weapon
 		var bullet
 		match PlayerStats.equipped_weapon:
@@ -172,7 +172,7 @@ func instantiate_bullet(): # Spawn in bullet
 	elif PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"] <= 0:
 		handle_reload()
 
-func handle_shooting(): # Calls the instantiate_bullet() function when timer stopped and detects a left click (held or press)
+func handle_shooting(): # Handles calling the instantiate_bullet() function when timer stopped and detects a left click (held or press); removes ammo from mag.
 	if Input.is_action_just_pressed("shoot") and shot_timer.is_stopped() and anim_player.current_animation != PlayerStats.equipped_weapon+"_reload":
 		instantiate_bullet()
 		shot_timer.start()
@@ -186,7 +186,7 @@ func _on_hotbar_gun_swapped(): # Changes timer shot cooldown on weapon change
 	label.text = str(PlayerStats.weapons[PlayerStats.equipped_weapon]["bullets"])+"    "+str(PlayerStats.weapons[PlayerStats.equipped_weapon]["mag"])+" | "+str(PlayerStats.weapons[PlayerStats.equipped_weapon]["mag_size"])
 	shot_timer.wait_time = PlayerStats.weapons[PlayerStats.equipped_weapon]["cooldown"]
 
-func handle_health(delta): # Kills the player if health is less than or equal to zero
+func handle_health(delta): # Handles health for the player e.g changes to death scene if the player's health is less than or equal to zero
 	if PlayerStats.health <= 0:
 		die()
 
@@ -195,7 +195,7 @@ func _on_pickup_zone_area_entered(area: Area2D) -> void: # Triggers collect() on
 		if area.has_method("collect"):
 			area.collect()
 
-func die(): # Change to the death screen scene on death
+func die(): # Handles death for player e.g changes to the death screen scene on death
 	get_tree().change_scene_to_file("res://Scenes/death_screen.tscn")
 
 func _on_max_health_update(value): # Update the health bar max value on upgrade
