@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bikg00gghcubw"
-path="res://.godot/imported/ammo-rifle 32px.png-036d79668749cd196a08f6b2a8322f03.ctex"
+path="res://.godot/imported/ammo-rifle 32px.png-2a8f37eb5516aacc60fd0d7587c69c46.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/guns/ammo-rifle 32px.png"
-dest_files=["res://.godot/imported/ammo-rifle 32px.png-036d79668749cd196a08f6b2a8322f03.ctex"]
+source_file="res://Assets/Guns/ammo-rifle 32px.png"
+dest_files=["res://.godot/imported/ammo-rifle 32px.png-2a8f37eb5516aacc60fd0d7587c69c46.ctex"]
 
 [params]
 

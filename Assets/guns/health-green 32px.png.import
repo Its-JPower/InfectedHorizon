@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://7ou8i2jgqktk"
-path="res://.godot/imported/health-green 32px.png-d2f7252d2b5084cb5566fe01c5a73c3f.ctex"
+path="res://.godot/imported/health-green 32px.png-23a4dd3030ba55d24164267a5f5ec12c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/guns/health-green 32px.png"
-dest_files=["res://.godot/imported/health-green 32px.png-d2f7252d2b5084cb5566fe01c5a73c3f.ctex"]
+source_file="res://Assets/Guns/health-green 32px.png"
+dest_files=["res://.godot/imported/health-green 32px.png-23a4dd3030ba55d24164267a5f5ec12c.ctex"]
 
 [params]
 
